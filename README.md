@@ -4,3 +4,4 @@
 <img src="https://github.com/blackcater/blackcater/raw/main/images/Hi.gif" height="32"/></h1>
 <h2 align="center">From cold Russia with hot love</h2>
 <h3>Представляю вам проект интерактивного листа персонажа для настольной ролевой игры Ведьмак</h3>
+![screenshot of sample](https://github.com/Pushkinmazila/WitcherTPRG/blob/master/Screenshot_list.jpg)
