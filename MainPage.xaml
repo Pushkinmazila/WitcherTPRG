@@ -3,15 +3,24 @@
     x:Class="MauiApp7.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:uranium="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
     xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material">
-
+    
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Настройки"
+            Command="{Binding ShowReleasesCommand}" />
+    </ContentPage.ToolbarItems>
+    
     <FlexLayout Direction="Column">
         <VerticalStackLayout
             Padding="10"
             BackgroundColor="Beige"
-            FlexLayout.Basis="600">
+            FlexLayout.Basis="700">
             <Grid Margin="3">
                 <Grid.RowDefinitions>
+                    <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
@@ -63,7 +72,8 @@
                            FlexLayout.Grow="1"
                            HasUnevenRows="True"
                            Grid.Row="7"
-                           ItemTapped="listView_ItemTapped">
+                           ItemTapped="listView_ItemTapped"
+                    HeightRequest ="300">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -105,8 +115,18 @@
                     </ListView.ItemTemplate>
                 </ListView>
 
+                <Border Grid.Row="8">
 
+                    <ListView x:Name="ListView_releasesInfo" ItemsSource="{Binding releasesInfo}" ItemTapped="OnApkFileTapped">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextCell Text="{Binding TagName}" CommandParameter="{Binding DownloadUrl}" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    
 
+                </Border>
 
             </Grid>
 
@@ -114,7 +134,20 @@
 
 
         </VerticalStackLayout>
- 
-    </FlexLayout>
 
+
+
+
+
+
+
+
+
+
+
+    </FlexLayout>
+   
+    
+    
+    
 </ContentPage>

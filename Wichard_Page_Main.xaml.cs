@@ -1046,34 +1046,6 @@ namespace MauiApp7
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
 
-            //if ( ((Microsoft.Maui.Controls.InputView)this.Buff).Text != null || ((Microsoft.Maui.Controls.InputView)this.Buff).Text != "" || ((Microsoft.Maui.Controls.InputView)this.Buff).Text != " ")
-            //{
-            //    if ( ((Microsoft.Maui.Controls.InputView)this.Debuff).Text != null || ((Microsoft.Maui.Controls.InputView)this.Debuff).Text != "" || ((Microsoft.Maui.Controls.InputView)this.Debuff).Text != " ")
-            //    {
-            //        if ( ((Microsoft.Maui.Controls.InputView)this.Skill).Text != null || ((Microsoft.Maui.Controls.InputView)this.Skill).Text != "" || ((Microsoft.Maui.Controls.InputView)this.Skill).Text != " ")
-            //        {
-            //            if ( ((Microsoft.Maui.Controls.InputView)parameter).Text != null || ((Microsoft.Maui.Controls.InputView)parameter).Text != "" || ((Microsoft.Maui.Controls.InputView)parameter).Text != " ")
-            //            {
-            //                if (value != null || value != "" || value != " ")
-            //                {
-            //                    int debuf = Int32.Parse(((InputView)this.Debuff).Text?.ToString().Trim().ToLower());
-
-            //                    int buf = Int32.Parse(((((InputView)parameter).Text))?.ToString().Trim().ToLower());
-
-            //                    int skill = Int32.Parse(((InputView)this.Skill).Text?.ToString().Trim().ToLower());
-
-            //                    int all = skill - debuf + buf;
-            //                    return all;
-
-            //                }
-
-            //            }
-
-            //        }
-
-            //    }
-
-            //}
 
 
             int skill;
@@ -1140,23 +1112,6 @@ namespace MauiApp7
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            //if (((Microsoft.Maui.Controls.InputView)this.Buff).Text != null || ((Microsoft.Maui.Controls.InputView)this.Buff).Text != "" || ((Microsoft.Maui.Controls.InputView)this.Buff).Text != " ")
-            //{
-               
-            //        if (((Microsoft.Maui.Controls.InputView)this.Skill).Text != null || ((Microsoft.Maui.Controls.InputView)this.Skill).Text != "" || ((Microsoft.Maui.Controls.InputView)this.Skill).Text != " ")
-            //        {
-            //            int skill = Int32.Parse(((InputView)this.Skill).Text?.ToString().Trim().ToLower());
-            //            if (((Microsoft.Maui.Controls.InputView)parameter).Text != null || ((Microsoft.Maui.Controls.InputView)parameter).Text != "" || ((Microsoft.Maui.Controls.InputView)parameter).Text != " ")
-            //            {
-            //                int buf = Int32.Parse(((((InputView)parameter).Text))?.ToString().Trim().ToLower());
-            //                if (value != null || value != "" || value != " ")
-            //                {
-                                
-            //                }
-                             
-            //            }
-            //        }
-            //}
 
             int skill;
             switch (((Microsoft.Maui.Controls.InputView)this.Skill).Text)

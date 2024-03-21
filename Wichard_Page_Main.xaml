@@ -1070,20 +1070,6 @@
                                             Text="{Binding Converter={local:StringToColorConverter2 Buff={ x:Reference AttentionEntryField},Debuff={ x:Reference Attention_DB_EntryField}, Skill={ x:Reference IntelligenceEntryField } }, Source={x:Reference Attention_I_EntryField}, Path=Text , ConverterParameter={ x:Reference AttentionEntryField},Mode=OneWayToSource}"
                                             />
 
-                                    <!--Text="{Binding Converter={StaticResource Minus}, Source={x:Reference Attention_I_EntryField}, Path=Text , ConverterParameter={ x:Reference IntelligenceEntryField},Mode=OneWayToSource}"-->
-                                    <!--<Entry
-                                            x:Name="Attention_DB_EntryField"
-                                            Grid.Row="1"
-                                            Grid.Column="2"
-                                            Margin="3">
-                                            <Entry.Text>
-                                                <MultiBinding Converter="{StaticResource MultiMathExpressionConverter}" ConverterParameter="x0 + x1"  >
-                                                    <Binding Path="IntelligenceEntryField"   Mode="OneWay" />
-                                                    <Binding Path="ReflexesEntryField" Mode="OneWay" />
-                                                </MultiBinding>
-                                            </Entry.Text>
-                                        </Entry>-->
-
                                     <Entry
                                             x:Name="Attention_I_EntryField"
                                             Grid.Row="1"
@@ -1092,17 +1078,8 @@
                                             IsReadOnly="False"
                                             Keyboard="Numeric" 
                                             Text="{Binding Converter={local:StringToColorConverter2 Buff={ x:Reference AttentionEntryField},Debuff={ x:Reference Attention_DB_EntryField}, Skill={ x:Reference IntelligenceEntryField } }, Source={x:Reference Attention_I_EntryField}, Path=Text , ConverterParameter={ x:Reference AttentionEntryField},Mode=OneWay}"
-                                        
                                             />
-                                    <!--Text="{Binding Converter={StaticResource Summ}, Source={x:Reference AttentionEntryField}, Path=Text , ConverterParameter={ x:Reference IntelligenceEntryField}, Mode=OneWay }"-->
-                                    <!--Text="{Binding Converter={StaticResource textCaseConverter}, Source={x:Reference IntelligenceEntryField}, Path=Text , ConverterParameter={ x:Reference Attention_I_EntryField}, Mode=OneWay }"-->
 
-                                    <!--Text="{Binding 
-                                                    Source={x:Reference AttentionEntryField},
-                                                    Path=Text,
-                                                    Converter={StaticResource ToVisibilityConverter },
-                                                    Mode=TwoWay 
-                                                  }" />-->
 
                                     <Label
                                             x:Name="Trade_lable"
@@ -1965,32 +1942,37 @@
                                 Margin="3"
                                 BackgroundColor="#ddd">
                             <Border BackgroundColor="#e1e1e1" Stroke="Gray">
-
-                                <Grid
+                                
+                                    <Grid
                                         x:Name="Equipment_box_local"
                                         Margin="3"
                                         BackgroundColor="#ddd"
-                                        RowDefinitions="30,500">
+                                        RowDefinitions="30,500"
+                                        ColumnDefinitions ="300">
 
                                     <Label
                                             x:Name="Equipment_lable"
                                             Grid.Row="0"
                                             FontSize="22"
                                             HorizontalTextAlignment="Center"
-                                            Text="Экипировка" />
+                                            Text="Экипировка"
+                                        />
                                     <Border
                                             Grid.Row="1"
                                             BackgroundColor="#e1e1e1"
-                                            Stroke="Gray">
+                                            Stroke="Gray"
+                                        HorizontalOptions="Fill">
                                         <ScrollView
                                                 HorizontalScrollBarVisibility="Always"
                                                 Orientation="Both"
-                                                VerticalScrollBarVisibility="Always">
+                                                VerticalScrollBarVisibility="Always"
+                                            HorizontalOptions="Fill">
 
                                             <Editor
                                                     x:Name="Equipment_Editor"
                                                     FontFamily="Helvetica"
-                                                    FontSize="16" />
+                                                    FontSize="16" 
+                                                    HorizontalOptions="Fill"/>
                                         </ScrollView>
                                     </Border>
                                 </Grid>
@@ -3052,7 +3034,8 @@
                                             <Editor
                                                     x:Name="Notes_Editor"
                                                     FontFamily="Helvetica"
-                                                    FontSize="16" />
+                                                    FontSize="16"
+                                                HorizontalOptions="FillAndExpand" />
                                         </ScrollView>
                                     </Border>
                                 </Grid>

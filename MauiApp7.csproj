@@ -56,6 +56,7 @@
 	  <ApplicationTitle>MauiApp7</ApplicationTitle>
 	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
 	  <Optimize>True</Optimize>
+	  <ApplicationDisplayVersion>1.0.0.2</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
@@ -64,42 +65,49 @@
 	  <ApplicationTitle>MauiApp7</ApplicationTitle>
 	  <Optimize>True</Optimize>
 	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+	  <ApplicationDisplayVersion>1.0.0.2</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
 	  <ApplicationId>com.nocompanyname.MauiApp7</ApplicationId>
 	  <ApplicationTitle>MauiApp7</ApplicationTitle>
 	  <Optimize>True</Optimize>
+	  <ApplicationDisplayVersion>1.0.0.2</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-maccatalyst|AnyCPU'">
 	  <ApplicationId>com.nocompanyname.MauiApp7</ApplicationId>
 	  <ApplicationTitle>MauiApp7</ApplicationTitle>
 	  <Optimize>True</Optimize>
+	  <ApplicationDisplayVersion>1.0.0.2</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationId>com.nocompanyname.MauiApp7</ApplicationId>
 	  <ApplicationTitle>MauiApp7</ApplicationTitle>
 	  <Optimize>True</Optimize>
+	  <ApplicationDisplayVersion>1.0.0.2</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
 	  <ApplicationId>com.nocompanyname.MauiApp7</ApplicationId>
 	  <ApplicationTitle>MauiApp7</ApplicationTitle>
 	  <Optimize>True</Optimize>
+	  <ApplicationDisplayVersion>1.0.0.2</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|AnyCPU'">
 	  <ApplicationId>com.nocompanyname.MauiApp7</ApplicationId>
 	  <ApplicationTitle>MauiApp7</ApplicationTitle>
 	  <Optimize>True</Optimize>
+	  <ApplicationDisplayVersion>1.0.0.2</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationId>com.nocompanyname.MauiApp7</ApplicationId>
 	  <ApplicationTitle>MauiApp7</ApplicationTitle>
 	  <Optimize>True</Optimize>
+	  <ApplicationDisplayVersion>1.0.0.2</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -142,9 +150,9 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.10" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.10" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.10" />
+		<PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.14" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.4.118" />
 		<PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
 	</ItemGroup>
 
@@ -168,6 +176,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Cyberpunk_red_Page.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="LoadingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Wichard_Page.xaml">
