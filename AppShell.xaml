@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MauiApp7.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MauiApp7"
+    Title="MauiApp7"
+    Shell.FlyoutBehavior="Disabled">
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+    
+    
+    <ShellContent
+        Title="Wichard"
+        ContentTemplate="{DataTemplate local:Wichard_Page}"
+        Route="Wichard_Page" />
+        <ShellContent
+            Title="Wichard_Main"
+            ContentTemplate="{DataTemplate local:Wichard_Page_Main}"
+            Route="Wichard_Page_Main" />
+        <ShellContent
+            Title="Wichard_Inventory"
+            ContentTemplate="{DataTemplate local:Wichard_Page_Inventory}"
+            Route="Wichard_Page_Inventory" />
+    
+    
+    <ShellContent
+        Title="Cyberpunk_red"
+        ContentTemplate="{DataTemplate local:Cyberpunk_red_Page}"
+        Route="Cyberpunk_red_Page" />
+    
+
+</Shell>

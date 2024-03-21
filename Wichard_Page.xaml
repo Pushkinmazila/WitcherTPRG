@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<TabbedPage
+    x:Class="MauiApp7.Wichard_Page"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
+    xmlns:local="clr-namespace:MauiApp7"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Wichard_Page"
+    mc:Ignorable="d">
+
+    <TabbedPage.Children>
+        <local:Wichard_Page_Main />
+        <local:Wichard_Page_Inventory />
+    </TabbedPage.Children>
+</TabbedPage>
