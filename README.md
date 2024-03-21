@@ -5,4 +5,4 @@
 <h2 align="center">From cold Russia with hot love</h2>
 <h3>Представляю вам проект интерактивного листа персонажа для настольной ролевой игры Ведьмак</h3>
 
-![alt text](WitcherTPRG/blob/master/Screenshot_list.jpg)
+![alt text](./Screenshot_list.jpg)
