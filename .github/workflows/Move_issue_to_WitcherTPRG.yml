@@ -1,28 +1,22 @@
-name: Get Backlog board ID
+name: Get Backlog board views
 
 on:
   issues:
     types: [opened]
 
 jobs:
-  get_board_id:
+  get_board_views:
     runs-on: ubuntu-latest
     steps:
-      - name: Get Backlog board ID
+      - name: Get Backlog board views
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           project_id=3  # Замените на реальный ID проекта "WitcherTPRG"
-          board_name="Backlog"
-
-          # Получаем список досок в проекте
-          boards=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/3/views")
-
-          # Находим ID доски "Backlog" в списке досок
-          board_id=$(echo "$boards" | jq -r '.[] | select(.name == "'"$board_name"'") | .id')
+          board_id=1    # Замените на реальный ID доски "Backlog"
           
-          if [ -z "$board_id" ]; then
-            echo "Board '$board_name' not found in project 'WitcherTPRG'."
-          else
-            echo "Board ID for '$board_name' in project 'WitcherTPRG' is $board_id."
-          fi
+          # Получаем список представлений в доске "Backlog"
+          views=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$project_id/boards/$board_id/views" | jq '.[] | .name')
+          
+          echo "Views in board 'Backlog' (project 'WitcherTPRG'):"
+          echo "$views"
