@@ -14,5 +14,14 @@ jobs:
         run: |
           issue_number=$(jq --raw-output .issue.number "$GITHUB_EVENT_PATH")
           project_id=3  # Замените на реальный ID проекта "WitcherTPRG"
-          # Перемещаем задачу в колонку "Todo" проекта "WitcherTPRG"
-          curl -X POST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.inertia-preview+json" -d "{\"content_id\": $issue_number}" "https://api.github.com/projects/$project_id/columns/1/cards"
+          
+          # Найти ID колонки "Todo"
+          todo_column_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$project_id/columns" | jq -r '.[] | select(.name == "Todo") | .id')
+          
+          if [ -z "$todo_column_id" ]; then
+            echo "Column 'Todo' not found in project 'WitcherTPRG'."
+            exit 1
+          fi
+          
+          # Переместить задачу в колонку "Todo"
+          curl -X POST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.inertia-preview+json" -d "{\"content_id\": $issue_number}" "https://api.github.com/projects/columns/$todo_column_id/cards"
