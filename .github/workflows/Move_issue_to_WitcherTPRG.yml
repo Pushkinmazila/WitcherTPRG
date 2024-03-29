@@ -13,12 +13,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           issue_number=$(jq --raw-output .issue.number "$GITHUB_EVENT_PATH")
-          project_name="WitcherTPRG"
-          # Получаем ID проекта "WitcherTPRG"
-          project_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/${{ github.repository }}/projects/3")
-          if [ -z "$project_id" ]; then
-            echo "Project '$project_name' not found."
-            exit 1
-          fi
+          project_id=3  # Замените на реальный ID проекта "WitcherTPRG"
           # Перемещаем задачу в колонку "Todo" проекта "WitcherTPRG"
-          curl -X POST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.inertia-preview+json" -d "{\"content_id\": $issue_number, \"column_name\": \"Todo\"}" "https://api.github.com/projects/${project_id}/columns/cards"
+          curl -X POST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.inertia-preview+json" -d "{\"content_id\": $issue_number}" "https://api.github.com/projects/$project_id/columns/1/cards"
