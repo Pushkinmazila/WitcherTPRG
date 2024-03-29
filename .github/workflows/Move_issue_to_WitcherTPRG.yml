@@ -1,20 +1,24 @@
-name: Find WitcherTPRG project ID
+name: Move issue to WitcherTPRG project
 
 on:
   issues:
     types: [opened]
 
 jobs:
-  find_project_id:
+  move_to_witcher_project:
     runs-on: ubuntu-latest
     steps:
-      - name: Find WitcherTPRG project ID
+      - name: Move issue to WitcherTPRG project
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          project_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/Pushkinmazila/WitcherTPRG/projects" | jq -r ".[] | select(.name == \"WitcherTPRG\") | .id")
+          issue_number=$(jq --raw-output .issue.number "$GITHUB_EVENT_PATH")
+          project_name="WitcherTPRG"
+          # Получаем ID проекта "WitcherTPRG"
+          project_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/${{ github.repository }}/projects" | jq -r ".[] | select(.name == \"$project_name\") | .id")
           if [ -z "$project_id" ]; then
             echo "Project '$project_name' not found."
             exit 1
           fi
-          echo "Project ID for '$project_name' is $project_id."
+          # Перемещаем задачу в колонку "Todo" проекта "WitcherTPRG"
+          curl -X POST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.inertia-preview+json" -d "{\"content_id\": $issue_number, \"column_name\": \"Todo\"}" "https://api.github.com/projects/${project_id}/columns/cards"
