@@ -1,0 +1,34 @@
+name: Move issue to WitcherTPRG project
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  move_to_witcher_project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Move issue to WitcherTPRG project
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          issue_number=$(jq --raw-output .issue.number "$GITHUB_EVENT_PATH")
+          project_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/${{ github.repository }}/projects" | jq ".[] | select(.name == \"WitcherTPRG\") | .id")
+          if [ -z "$project_id" ]; then
+            echo "Project 'WitcherTPRG' not found."
+            exit 1
+          fi
+          # Получаем ID колонки "Status"
+          status_column_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/${project_id}/columns" | jq ".[] | select(.name == \"Status\") | .id")
+          if [ -z "$status_column_id" ]; then
+            echo "Column 'Status' not found in project 'WitcherTPRG'."
+            exit 1
+          fi
+          # Получаем ID значения "Todo" в колонке "Status"
+          todo_value_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/columns/${status_column_id}/cards" | jq ".[] | select(.content_url | contains(\"issues/$issue_number\")) | .id")
+          if [ -z "$todo_value_id" ]; then
+            echo "Value 'Todo' not found in column 'Status' in project 'WitcherTPRG'."
+            exit 1
+          fi
+          # Перемещаем задачу в колонку "Status" со значением "Todo"
+          curl -X POST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.inertia-preview+json" -d "{\"content_id\": $issue_number, \"column_id\": $status_column_id, \"previous_column_id\": null, \"position\": \"top\"}" "https://api.github.com/projects/columns/cards/$todo_value_id/moves"
