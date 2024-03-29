@@ -11,12 +11,10 @@ jobs:
       - name: Get Backlog board views
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROJECT_ID: 3  # Замените на реальный ID проекта "WitcherTPRG"
+          BOARD_ID: 1    # Замените на реальный ID доски "Backlog"
         run: |
-          project_id=3  # Замените на реальный ID проекта "WitcherTPRG"
-          board_id=1    # Замените на реальный ID доски "Backlog"
-          
-          # Получаем список представлений в доске "Backlog"
-          views=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$project_id/boards/$board_id/views" | jq '.[] | .name')
+          views=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$PROJECT_ID/boards/$BOARD_ID/views" | jq '.[] | .name')
           
           echo "Views in board 'Backlog' (project 'WitcherTPRG'):"
           echo "$views"
