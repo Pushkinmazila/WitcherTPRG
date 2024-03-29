@@ -15,8 +15,11 @@ jobs:
           project_id=3  # Замените на реальный ID проекта "WitcherTPRG"
           board_name="Backlog"
 
-          # Найти ID доски "Backlog" в проекте "WitcherTPRG"
-          board_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$project_id/boards" | jq -r '.[] | select(.name == "'$board_name'") | .id')
+          # Получаем список досок в проекте
+          boards=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$project_id/boards")
+
+          # Находим ID доски "Backlog" в списке досок
+          board_id=$(echo "$boards" | jq -r '.[] | select(.name == "'"$board_name"'") | .id')
           
           if [ -z "$board_id" ]; then
             echo "Board '$board_name' not found in project 'WitcherTPRG'."
