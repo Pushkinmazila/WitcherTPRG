@@ -1,37 +1,24 @@
-name: Move issue to WitcherTPRG project
+name: Get Backlog board ID
 
 on:
-  issues:
-    types: [opened]
+  workflow_dispatch:
 
 jobs:
-  move_to_witcher_project:
+  get_board_id:
     runs-on: ubuntu-latest
     steps:
-      - name: Move issue to WitcherTPRG project
+      - name: Get Backlog board ID
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          issue_number=$(jq --raw-output .issue.number "$GITHUB_EVENT_PATH")
           project_id=3  # Замените на реальный ID проекта "WitcherTPRG"
           board_name="Backlog"
-          status_name="Todo"
 
-          # Найти ID доски
+          # Найти ID доски "Backlog" в проекте "WitcherTPRG"
           board_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$project_id/boards" | jq -r '.[] | select(.name == "'$board_name'") | .id')
           
           if [ -z "$board_id" ]; then
             echo "Board '$board_name' not found in project 'WitcherTPRG'."
-            exit 1
+          else
+            echo "Board ID for '$board_name' in project 'WitcherTPRG' is $board_id."
           fi
-          
-          # Найти ID колонки "Todo" в доске "Backlog"
-          status_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/columns/$board_id/cards" | jq -r '.[] | select(.note == "'$status_name'") | .id')
-          
-          if [ -z "$status_id" ]; then
-            echo "Status '$status_name' not found in board '$board_name' in project 'WitcherTPRG'."
-            exit 1
-          fi
-          
-          # Переместить задачу в колонку "Todo"
-          curl -X POST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.inertia-preview+json" -d "{\"content_id\": $issue_number}" "https://api.github.com/projects/columns/cards/$status_id/moves"
