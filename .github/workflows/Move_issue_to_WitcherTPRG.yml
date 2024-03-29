@@ -1,7 +1,8 @@
 name: Get Backlog board ID
 
 on:
-  workflow_dispatch:
+  issues:
+    types: [opened]
 
 jobs:
   get_board_id:
