@@ -13,6 +13,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           issue_number=$(jq --raw-output .issue.number "$GITHUB_EVENT_PATH")
+          # Получаем ID проекта "WitcherTPRG"
           project_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/${{ github.repository }}/projects" | jq ".[] | select(.name == \"WitcherTPRG\") | .id")
           if [ -z "$project_id" ]; then
             echo "Project 'WitcherTPRG' not found."
