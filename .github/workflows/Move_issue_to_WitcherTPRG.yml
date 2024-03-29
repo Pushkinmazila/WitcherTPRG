@@ -16,7 +16,7 @@ jobs:
           board_name="Backlog"
 
           # Получаем список досок в проекте
-          boards=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$project_id/boards")
+          boards=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/3/views")
 
           # Находим ID доски "Backlog" в списке досок
           board_id=$(echo "$boards" | jq -r '.[] | select(.name == "'"$board_name"'") | .id')
