@@ -15,7 +15,7 @@ jobs:
           BOARD_ID: 1    # Замените на реальный ID доски "Backlog"
         run: |
           views=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$PROJECT_ID/boards/$BOARD_ID/views" | jq '.[] | .name')
-          echo "::set-output name=response::$response"  # Сохраняем ответ в выходную переменную
+          echo "::set-output name=response::$views"  # Сохраняем ответ в выходную переменную
 
       - name: Check for error
         id: check_error
