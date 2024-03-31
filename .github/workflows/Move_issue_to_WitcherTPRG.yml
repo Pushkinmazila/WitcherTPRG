@@ -14,12 +14,14 @@ jobs:
           PROJECT_ID: 3  # Замените на реальный ID проекта "WitcherTPRG"
           BOARD_ID: 1    # Замените на реальный ID доски "Backlog"
         run: |
-          views=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/" | jq)
+          views=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$PROJECT_ID/boards/$BOARD_ID/views" | jq '.[] | .name')
       - name: Check for errors
         if: steps.get_views.outcome == 'failure'
         run: |
           echo "{{ failure-message }}"
+          curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "166879880", "text": "Я не сделяль {{ failure-message }}"}' https://api.telegram.org/bot1096638690:AAHnbtW76cjCLlEwZzn38fibVcZ29TSwp7Q/sendMessage
           exit 1
-      - name: Send Telegram Notification
+      - name: Check for success  
+        if: steps.get_views.outcome == 'success'  
         run: |
-          curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "166879880", "text": "Ваш текст оповещения"}' https://api.telegram.org/bot1096638690:AAHnbtW76cjCLlEwZzn38fibVcZ29TSwp7Q/sendMessage
+          curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "166879880", "text": "Я сделяль"}' https://api.telegram.org/bot1096638690:AAHnbtW76cjCLlEwZzn38fibVcZ29TSwp7Q/sendMessage
