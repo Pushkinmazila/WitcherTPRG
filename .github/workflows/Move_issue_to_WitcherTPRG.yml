@@ -14,27 +14,16 @@ jobs:
         id: hello
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PROJECT_ID: 3  # continue-on-error: true
+          PROJECT_ID: 3  # Замените на реальный ID проекта "WitcherTPRG"
           BOARD_ID: 1    # Замените на реальный ID доски "Backlog"
         run: |
           views=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$PROJECT_ID/boards/$BOARD_ID/views" | jq '.[] | .name')
-          curl_exit_code=$?
-          if [ $curl_exit_code -ne 0 ]; then
+          if [ -z "$views" ]; then
             echo "Ошибка при выполнении команды curl"
-          exit 1
-          fi
+            curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "${{ secrets.BOT_TELLEGRAM_CHAT_ID }}", "text": "Я не сделяль ${{ github.WORKFLOW }} и вот поч ${{ github.failure_message }} "}' https://api.telegram.org/bot${{ secrets.BOT_TELLEGRAM_CHAT_TOKEN }}/sendMessage
+            exit 1  # Добавлено для явного завершения выполнения скрипта в случае ошибки
+          else
             echo "Команда curl выполнена успешно"
-  check_job_status:
-    runs-on: ubuntu-latest
-    needs: get_board_views
-    steps:
-      - name: Check if the previous job failed
-        if: ${{ failure() }}
-        run: |
-          echo "Предыдущий джоб завершился с ошибкой"
-          echo "${{ job.status }}"
-      - name: Check if the previous job succeeded
-        if: ${{ success() }}
-        run: |
-          echo "Предыдущий джоб завершился успешно"
-          echo "${{ job.status }}"
+            curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "${{ secrets.BOT_TELLEGRAM_CHAT_ID }}", "text": "Я сделяль ${{ github.WORKFLOW }} воо"}' https://api.telegram.org/bot${{ secrets.BOT_TELLEGRAM_CHAT_TOKEN }}/sendMessage
+          fi
+		  
