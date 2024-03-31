@@ -23,3 +23,20 @@ jobs:
             echo "Команда curl выполнена успешно"
             curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "${{ secrets.BOT_TELLEGRAM_CHAT_ID }}", "text": "Я сделяль ${{ github.WORKFLOW }} воо"}' https://api.telegram.org/bot${{ secrets.BOT_TELLEGRAM_CHAT_TOKEN }}/sendMessage
           fi
+      - name: Get Latest Release
+        id: get_release
+        run: |
+          latest_release=$(curl -s "https://api.github.com/repos/Pushkinmazila/WitcherTPRG/releases/latest" | jq -r '.tag_name')
+          echo "::set-output name=latest_release::$latest_release"
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v1.0.4
+          release_name: Release 1.0.4
+          body: Release notes
+          draft: false
+          prerelease: false
+          run: echo "Latest release is ${{ steps.get_release.outputs.latest_release }}"
