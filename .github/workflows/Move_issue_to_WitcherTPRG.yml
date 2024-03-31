@@ -26,4 +26,3 @@ jobs:
             echo "Команда curl выполнена успешно"
             curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "${{ secrets.BOT_TELLEGRAM_CHAT_ID }}", "text": "Я сделяль ${{ github.WORKFLOW }} воо"}' https://api.telegram.org/bot${{ secrets.BOT_TELLEGRAM_CHAT_TOKEN }}/sendMessage
           fi
-		  
