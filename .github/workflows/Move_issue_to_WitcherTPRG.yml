@@ -18,4 +18,9 @@ jobs:
         run: |
           views=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$PROJECT_ID/boards/$BOARD_ID/views" )
           echo "::set-output name=response::$views"  # Сохраняем ответ в выходную переменную
-          if: ${{ failure() ||  success() }}
+          if [ $? -ne 0 ]; then
+            echo "Ошибка при выполнении команды curl"
+            exit 1
+          else
+            echo "Команда curl выполнена успешно"  
+          fi
