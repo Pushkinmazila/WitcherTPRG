@@ -61,6 +61,7 @@
 	  <RunAOTCompilation>False</RunAOTCompilation>
 	  <AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
 	  <DebugSymbols>True</DebugSymbols>
+	  <PublishTrimmed>true</PublishTrimmed>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
@@ -72,6 +73,7 @@
 	  <ApplicationDisplayVersion>1</ApplicationDisplayVersion>
 	  <DebugSymbols>True</DebugSymbols>
 	  <PublishTrimmed>False</PublishTrimmed>
+	  <PublishTrimmed>true</PublishTrimmed>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">

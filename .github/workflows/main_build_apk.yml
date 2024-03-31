@@ -1,32 +1,35 @@
-name: .NET MAUI Build
+name: Build and Publish Android APK
 
 on:
   push:
     branches:
-      - main
+      - master
+    paths-ignore:
+      - "**.md"
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: windows-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '8.0.x' #версия.NET SDK
-
-    - name: Restore NuGet packages
-      run: dotnet restore
-
-    - name: Build .NET MAUI project
-      run: dotnet build -t:restore -t:build --configuration Release
-
-    - name: Publish Android APK
+    - uses: actions/checkout@v3
+    - name: Setup Keystore File
       run: |
-        cd Platforms/Android
-        dotnet msbuild -t:InstallSdkTargets,PackageForAndroid -p:Configuration=Release
-    - name: Move APK file to Android project directory
-      run: mv bin/Release/*.apk Platforms/Android
+        echo "${{ secrets.KEYSTORE_FILE }}" > myapp.keystore.asc
+        gpg -d --passphrase "${{ secrets.KEYSTORE_PASSWORD_GPG }}" --batch myapp.keystore.asc > myapp.keystore
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 8.0.x
+    - name: Install .NET MAUI
+      run: dotnet workload install maui
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build MauiApp7.csproj -c Release -f net8.0-android /p:AndroidSigningKeyStore=myapp.keystore /p:AndroidSigningKeyAlias=ghactionskey /p:AndroidSigningKeyPass="${{ secrets.KEYSTORE_PASSWORD }}" /p:AndroidSigningStorePass="${{ secrets.KEYSTORE_PASSWORD_ALIAS }}" --no-restore
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        path: |
+          ./**/*.aab
+          ./**/*.apk
