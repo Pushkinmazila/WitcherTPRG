@@ -44,7 +44,7 @@ jobs:
         env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: "v${{ steps.increment_release.outputs.incremented_release }}"
+          tag_name: "${{ steps.increment_release.outputs.incremented_release }}"
           release_name: "Release ${{ steps.increment_release.outputs.incremented_release }}"
           body: Release notes
           draft: false
