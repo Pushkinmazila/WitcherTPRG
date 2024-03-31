@@ -23,3 +23,16 @@ jobs:
           exit 1
           fi
             echo "Команда curl выполнена успешно"
+  check_job_status:
+    needs: get_board_views
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if the previous job failed
+        if: ${{ failure() }}
+        run: |
+          echo "Предыдущий джоб завершился с ошибкой"
+      
+      - name: Check if the previous job succeeded
+        if: ${{ success() }}
+        run: |
+          echo "Предыдущий джоб завершился успешно"
