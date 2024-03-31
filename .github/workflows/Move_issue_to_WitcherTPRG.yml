@@ -18,6 +18,4 @@ jobs:
         run: |
           views=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$PROJECT_ID/boards/$BOARD_ID/views" )
           echo "::set-output name=response::$views"  # Сохраняем ответ в выходную переменную
-      - name: Check on failures
-        if: (${{ success() }} || ${{ failure() }}) )
-        run: exit 1
+          if: ${{ failure( echo "Э") ||  success(echo "Г") }}
