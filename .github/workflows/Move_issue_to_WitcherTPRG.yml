@@ -17,8 +17,7 @@ jobs:
           BOARD_ID: 1    # Замените на реальный ID доски "Backlog"
         run: |
           views=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$PROJECT_ID/boards/$BOARD_ID/views" | jq '.[] | .name')
-          echo "::set-output name=response::$views"  # Сохраняем ответ в выходную переменную
-          if [ $? -ne 0 ]; then
+          if [ $views -ne 0 ]; then
             echo "Ошибка при выполнении команды curl"
             curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "${{ secrets.BOT_TELLEGRAM_CHAT_ID }}", "text": "Я не сделяль ${{ github.WORKFLOW }} и вот поч ${{ github.failure_message }} "}' https://api.telegram.org/bot${{ secrets.BOT_TELLEGRAM_CHAT_TOKEN }}/sendMessage
             exit 1
