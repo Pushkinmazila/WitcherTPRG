@@ -15,13 +15,23 @@ jobs:
           BOARD_ID: 1    # Замените на реальный ID доски "Backlog"
         run: |
           views=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$PROJECT_ID/boards/$BOARD_ID/views" | jq '.[] | .name')
-      - name: Check for errors
-        if: steps.get_views.outcome == 'failure'
+          echo "::set-output name=response::$response"  # Сохраняем ответ в выходную переменную
+
+      - name: Check for error
+        id: check_error
+        run: echo "${{ steps.get_api_response.outputs.response }}" | jq '.error'  # Проверяем наличие ошибки в ответе
+
+      - name: Handle Error
+        if: steps.check_error.outputs.error != "null"
         run: |
-          echo "{{ failure-message }}"
-          curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "166879880", "text": "Я не сделяль {{ failure-message }}"}' https://api.telegram.org/bot1096638690:AAHnbtW76cjCLlEwZzn38fibVcZ29TSwp7Q/sendMessage
-          exit 1
-      - name: Check for success  
-        if: steps.get_views.outcome == 'success'  
+          error_message=$(echo "${{ steps.get_api_response.outputs.response }}" | jq -r '.error.message')
+          echo "Error occurred: $error_message"
+          curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "166879880", "text": "Я не сделяль $error_message"}' https://api.telegram.org/bot1096638690:AAHnbtW76cjCLlEwZzn38fibVcZ29TSwp7Q/sendMessage
+          # Отправить HTTP запрос с текстом ошибки
+
+      - name: Handle Success
+        if: steps.check_error.outputs.error == "null"
         run: |
-          curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "166879880", "text": "Я сделяль"}' https://api.telegram.org/bot1096638690:AAHnbtW76cjCLlEwZzn38fibVcZ29TSwp7Q/sendMessage
+          echo "No error detected"
+          # Отправить HTTP запрос о успешном выполнении    
+          curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "166879880", "text": "Я сделяль $GITHUB_WORKFLOW"}' https://api.telegram.org/bot1096638690:AAHnbtW76cjCLlEwZzn38fibVcZ29TSwp7Q/sendMessage
