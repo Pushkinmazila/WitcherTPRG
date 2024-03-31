@@ -159,10 +159,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="..\..\..\Downloads\icon.png">
+	  <None Include="..\..\..\..\..\Resources\icons\icon.png">
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
 
@@ -223,6 +222,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Update="Resources\icons\icon.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	  <None Update="Resources\Styles\styles.xml">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
