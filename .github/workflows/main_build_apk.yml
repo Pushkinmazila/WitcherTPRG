@@ -1,4 +1,4 @@
-name: .NET MAUI Build
+name: Build and Publish Android APK
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
-
+    runs-on: ubuntu-latest
+    
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -16,17 +16,13 @@ jobs:
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '8.0.x' #версия.NET SDK
+        dotnet-version: '8.0.x' # .NET SDK
 
     - name: Restore NuGet packages
       run: dotnet restore
 
     - name: Build .NET MAUI project
-      run: dotnet build -t:restore -t:build --configuration Release
+      run: dotnet build -t:restore -t:build --configuration Release --framework net8.0-android
 
-    - name: Publish Android APK
-      run: |
-        cd Platforms/Android
-        dotnet msbuild -t:InstallSdkTargets,PackageForAndroid -p:Configuration=Release
     - name: Move APK file to Android project directory
-      run: mv bin/Release/*.apk Platforms/Android
+      run: mv bin/Release/net8.0-android/*.apk Platforms/Android
