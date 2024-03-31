@@ -15,15 +15,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PROJECT_ID: 3  # Замените на реальный ID проекта "WitcherTPRG"
           BOARD_ID: 1    # Замените на реальный ID доски "Backlog"
-          HELLO_STEP_ID: ${{ github.WORKFLOW }}
         run: |
           views=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$PROJECT_ID/boards/$BOARD_ID/views" )
           echo "::set-output name=response::$views"  # Сохраняем ответ в выходную переменную
           if [ $? -ne 0 ]; then
             echo "Ошибка при выполнении команды curl"
-            curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "${{ secrets.BOT_TELLEGRAM_CHAT_ID }}", "text": "Я не сделяль $GITHUB_WORKFLOW и вот поч "}' https://api.telegram.org/bot${{ secrets.BOT_TELLEGRAM_CHAT_TOKEN }}/sendMessage
+            curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "${{ secrets.BOT_TELLEGRAM_CHAT_ID }}", "text": "Я не сделяль ${{ github.WORKFLOW }} и вот поч ${{ failure.message }} "}' https://api.telegram.org/bot${{ secrets.BOT_TELLEGRAM_CHAT_TOKEN }}/sendMessage
             exit 1
           else
             echo "Команда curl выполнена успешно"
-            curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "${{ secrets.BOT_TELLEGRAM_CHAT_ID }}", "text": "Я сделяль ${{env.HELLO_STEP_ID}} воо"}' https://api.telegram.org/bot${{ secrets.BOT_TELLEGRAM_CHAT_TOKEN }}/sendMessage
+            curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "${{ secrets.BOT_TELLEGRAM_CHAT_ID }}", "text": "Я сделяль ${{ github.WORKFLOW }} воо"}' https://api.telegram.org/bot${{ secrets.BOT_TELLEGRAM_CHAT_TOKEN }}/sendMessage
           fi
