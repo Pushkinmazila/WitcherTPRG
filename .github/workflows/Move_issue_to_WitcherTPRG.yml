@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+
 jobs:
   get_board_views:
     runs-on: ubuntu-latest
@@ -19,17 +20,17 @@ jobs:
 
       - name: Check for error
         id: check_error
-        run: echo "${{ steps.get_api_response.outputs.response }}" | jq '.error'  # Проверяем наличие ошибки в ответе
+        run: echo "${{ steps.get_board_views.outputs.response }}" | jq '.error'  # Проверяем наличие ошибки в ответе
 
       - name: Handle Error
         if: steps.check_error.outputs.error
         run: |
-          error_message=$(echo "${{ steps.get_api_response.outputs.response }}" | jq -r '.error.message')
+          error_message=$(echo "${{ steps.get_board_views.outputs.response }}" | jq -r '.error.message')
           echo "Error occurred: $error_message"
-          curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "166879880", "text": "Я не сделяль $error_message"}' https://api.telegram.org/bot1096638690:AAHnbtW76cjCLlEwZzn38fibVcZ29TSwp7Q/sendMessage
+          curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "1000000000", "text": "Я не сделяль $error_message"}' https://api.telegram.org/bot100000000000:AAaaaaaaaaaaaaaaa/sendMessage
           
       - name: Handle Success
-        if: steps.check_error.outputs.error
+        if: steps.check_error.outputs.error == null
         run: |
           echo "No error detected"
-          curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "166879880", "text": "Я сделяль $GITHUB_WORKFLOW"}' https://api.telegram.org/bot1096638690:AAHnbtW76cjCLlEwZzn38fibVcZ29TSwp7Q/sendMessage
+          curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "100000", "text": "Я сделяль $GITHUB_WORKFLOW"}' https://api.telegram.org/bot1000000:AAaaaaaaaaaaaaaaaaa/sendMessage
