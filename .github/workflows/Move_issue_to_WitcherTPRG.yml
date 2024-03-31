@@ -16,7 +16,7 @@ jobs:
           PROJECT_ID: 3  # Замените на реальный ID проекта "WitcherTPRG"
           BOARD_ID: 1    # Замените на реальный ID доски "Backlog"
         run: |
-          views=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$PROJECT_ID/boards/$BOARD_ID/views" )
+          views=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$PROJECT_ID/boards/$BOARD_ID/views" | jq '.[] | .name')
           echo "::set-output name=response::$views"  # Сохраняем ответ в выходную переменную
           if [ $? -ne 0 ]; then
             echo "Ошибка при выполнении команды curl"
