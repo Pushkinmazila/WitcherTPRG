@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiApp7.add_weapons"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MauiApp7"
+    xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+    Title="add_weapons">
+    <StackLayout>
+
+        
+        <StackLayout>
+            <Border HeightRequest="400" WidthRequest="1000">
+                <ScrollView Orientation="Both" HorizontalScrollBarVisibility="Always" VerticalScrollBarVisibility="Always">
+                    <Border>
+
+
+                        <material:DataGrid
+                            x:Name="weaponsDataGrid"
+                            ItemsSource="{Binding weapons}"
+                            SelectedItems="{Binding SelectedItems}"
+                            VerticalOptions="Start" >
+                            <ActivityIndicator IsRunning="{Binding IsBusy}" Margin="40" />
+
+
+                            <material:DataGrid.Columns>
+
+                                <material:DataGridColumn >
+
+                                    <material:DataGridColumn.TitleView>
+                                        <Button x:Name="itemss" Text="Нажмите здесь ↕" Clicked="LabelButton_Clicked" TextColor="Black" BackgroundColor="Transparent" BorderColor="Transparent">
+                                            <Button.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <On Platform="iOS" Value="System"/>
+                                                    <On Platform="Android" Value="sans-serif-light"/>
+                                                </OnPlatform>
+                                            </Button.FontFamily>
+                                        </Button>
+                                    </material:DataGridColumn.TitleView>
+
+                                    <material:DataGridColumn.CellItemTemplate>
+                                        <DataTemplate>
+                                            <!--<Label Text="{Binding Название}" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" Margin="0" />-->
+                                            <CheckBox
+                                                Margin="0"
+                                                HorizontalOptions="Center"
+                                                IsChecked="{Binding IsChecked}"
+                                                VerticalOptions="Center" />
+
+                                        </DataTemplate>
+                                    </material:DataGridColumn.CellItemTemplate>
+                                </material:DataGridColumn>
+
+                                <material:DataGridColumn
+                                    Title="Id"
+                                    Width="10"
+                                    Binding="{Binding Id}"
+                                    />
+                                <material:DataGridColumn
+                                    Title="Название"
+                                    Width="Auto"
+                                    Binding="{Binding Название}" />
+                                <material:DataGridColumn
+                                    Title="Id2"
+                                    Width="10"
+                                    Binding="{Binding Id}"
+                                    />
+                                <material:DataGridColumn
+                                    Title="Тип урона"
+                                    Width="Auto"
+                                    Binding="{Binding Тип_Урона}" />
+                                <material:DataGridColumn
+                                    Title="Точность"
+                                    Width="Auto"
+                                    Binding="{Binding Точность}" />
+                                <material:DataGridColumn
+                                    Title="Доступность"
+                                    Width="Auto"
+                                    Binding="{Binding Доступность}" />
+                                <material:DataGridColumn
+                                    Title="Урон"
+                                    Width="Auto"
+                                    Binding="{Binding Урон}" />
+                                <material:DataGridColumn
+                                    Title="Урон+"
+                                    Width="Auto"
+                                    Binding="{Binding УронPlus}" />
+                                <material:DataGridColumn
+                                    Title="Надёжность"
+                                    Width="Auto"
+                                    Binding="{Binding Надёжность}" />
+                                <material:DataGridColumn
+                                    Title="Xват"
+                                    Width="Auto"
+                                    Binding="{Binding Xват}" />
+                                <material:DataGridColumn
+                                    Title="Дальность"
+                                    Width="Auto"
+                                    Binding="{Binding Дальность}" />
+                                <material:DataGridColumn
+                                    Title="Эффект"
+                                    Width="Auto"
+                                    Binding="{Binding Эффект}" />
+                                <material:DataGridColumn
+                                    Title="Эффект_логика"
+                                    Width="Auto"
+                                    Binding="{Binding ЭффектЛогика}" />
+                                <material:DataGridColumn
+                                    Title="Скрытность"
+                                    Width="Auto"
+                                    Binding="{Binding Скрытность}" />
+                                <material:DataGridColumn
+                                    Title="Усиление"
+                                    Width="Auto"
+                                    Binding="{Binding Усиление}" />
+                                <material:DataGridColumn
+                                    Title="Вес"
+                                    Width="Auto"
+                                    Binding="{Binding Вес}" />
+                                <material:DataGridColumn
+                                    Title="Цена"
+                                    Width="Auto"
+                                    Binding="{Binding Цена}" />
+                                <material:DataGridColumn
+                                    Title="Категория"
+                                    Width="Auto"
+                                    Binding="{Binding Категория}" />
+                                <material:DataGridColumn
+                                    Title="Навык"
+                                    Width="Auto"
+                                    Binding="{Binding Навык}" />
+
+                            </material:DataGrid.Columns>
+                        </material:DataGrid>
+                    </Border>
+                </ScrollView>
+            </Border>
+
+        </StackLayout>
+
+        <StackLayout>
+
+            <Button Clicked="Button_add_weapon_Clicked" Text="Добавить" />
+            <Button Clicked="Button_back_Clicked" Text="Назад" />
+        </StackLayout>
+
+
+    </StackLayout>
+</ContentPage>

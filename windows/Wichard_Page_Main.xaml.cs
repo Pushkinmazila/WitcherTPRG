@@ -9,6 +9,7 @@ using System.Xml.Serialization;
 using Microsoft.Maui.Controls;
 
 
+
 namespace MauiApp7
 {
 
@@ -24,18 +25,246 @@ namespace MauiApp7
         public int count = 0;
         public  LocalDbService _dbService;
         public int _editCustomerID;
-        private readonly INavigation _navigation;
-
-        double startScale, currentScale;
 
 
 
-
-
-
-        private void RefreshButton_Clicked(object sender, System.EventArgs e)
+        private async void Refresh()
         {
-            //Wichard_load();
+            #region[Загрузка из БД]
+
+            Player player33;
+            _dbService = new LocalDbService();
+            player33 = await _dbService.GetById(((MauiApp7.Player)this.Background.BindingContext).Id);
+
+            #endregion
+
+            #region[Заполнение данных из БД]
+
+
+
+            #endregion
+
+            #region[Заполнение данных из БД]
+
+            nameEntryField.Text = "1";
+            JobEntryField.Text = "1";
+            RaceEntryField.Text = "1";
+            SexEntryField.Text = "1";
+            AgeEntryField.Text = "1";
+            IntelligenceEntryField.Text = "1";
+            ReflexesEntryField.Text = "1";
+            DexterityEntryField.Text = "1";
+            BodyEntryField.Text = "1";
+            SpeedEntryField.Text = "1";
+            EmpathyEntryField.Text = "1";
+            RepairEntryField.Text = "1";
+            WillEntryField.Text = "1";
+            restEntryField.Text = "1";
+            WeightEntryField.Text = "1";
+            EnduranceEntryField.Text = "1";
+            HPEntryField.Text = "1";
+            JumpEntryField.Text = "1";
+            RunEntryField.Text = "1";
+            FatigueEntryField.Text = "1";
+            LuckEntryField.Text = "1";
+            HP_EntryField.Text = "1";
+            Stamm_EntryField.Text = "1";
+            Energy_EntryField.Text = "1";
+            Luck_EntryField.Text = "1";
+            Concentrat_EntryField.Text = "1";
+            Adrenalin_EntryField.Text = "1";
+            EXP_EntryField.Text = "1";
+            Name_WEntryField.Text = "1";
+            Accuracy_WEntryField.Text = "1";
+            Damage_WEntryField.Text = "1";
+            Durable_WEntryField.Text = "1";
+            Grip_WEntryField.Text = "1";
+            Dist_WEntryField.Text = "1";
+            Effects_WEntryField.Text = "1";
+            Hidden_WEntryField.Text = "1";
+            Improvement_WEntryField.Text = "1";
+            Weight_WEntryField.Text = "1";
+            H_D_11_AEntryField.Text = "1";
+            H_PB_12_AEntryField.Text = "1";
+            B_D_21_AEntryField.Text = "1";
+            B_PB_22_AEntryField.Text = "1";
+            LH_D_34_AEntryField.Text = "1";
+            LH_PB_35_AEntryField.Text = "1";
+            RH_D_31_AEntryField.Text = "1";
+            RH_PB_32_AEntryField.Text = "1";
+            LL_D_14_AEntryField.Text = "1";
+            LL_PB_15_AEntryField.Text = "1";
+            RL_D_42_AEntryField.Text = "1";
+            RL_PB_52_AEntryField.Text = "1";
+            AttentionEntryField.Text = "1";
+            Attention_DB_EntryField.Text = "1";
+            Attention_I_EntryField.Text = "1";
+            TradeEntryField.Text = "1";
+            Trade_DB_EntryField.Text = "1";
+            Trade_I_EntryField.Text = "1";
+            DeductionEntryField.Text = "1";
+            Deduction_DB_EntryField.Text = "1";
+            Deduction_I_EntryField.Text = "1";
+            EducationEntryField.Text = "1";
+            Education_DB_EntryField.Text = "1";
+            Education_I_EntryField.Text = "1";
+            L_UniversalEntryField.Text = "1";
+            L_Universal_DB_EntryField.Text = "1";
+            L_Universal_I_EntryField.Text = "1";
+            L_S_SEntryField.Text = "1";
+            L_KEntryField.Text = "1";
+            L_K_DB_EntryField.Text = "1";
+            L_K_I_EntryField.Text = "1";
+            MonstrologyEntryField.Text = "1";
+            Monstrology_DB_EntryField.Text = "1";
+            Monstrology_I_EntryField.Text = "1";
+            EtiquetteEntryField.Text = "1";
+            Etiquette_DB_EntryField.Text = "1";
+            Etiquette_I_EntryField.Text = "1";
+            OrientationEntryField.Text = "1";
+            Orientation_DB_EntryField.Text = "1";
+            Orientation_I_EntryField.Text = "1";
+            TacticsEntryField.Text = "1";
+            Tactics_DB_EntryField.Text = "1";
+            Tactics_I_EntryField.Text = "1";
+            KnowledgeEntryField.Text = "1";
+            Knowledge_DB_EntryField.Text = "1";
+            Knowledge_I_EntryField.Text = "1";
+            SurvivalEntryField.Text = "1";
+            Survival_DB_EntryField.Text = "1";
+            Survival_I_EntryField.Text = "1";
+            Shoot_BowEntryField.Text = "1";
+            Shoot_Bow_DB_EntryField.Text = "1";
+            Shoot_Bow_D_EntryField.Text = "1";
+            AthleticsEntryField.Text = "1";
+            Athletics_DB_EntryField.Text = "1";
+            Athletics_D_EntryField.Text = "1";
+            ShootCrossbowEntryField.Text = "1";
+            ShootCrossbow_DB_EntryField.Text = "1";
+            ShootCrossbow_D_EntryField.Text = "1";
+            SleightEntryField.Text = "1";
+            Sleight_DB_EntryField.Text = "1";
+            Sleight_D_EntryField.Text = "1";
+            StealthEntryField.Text = "1";
+            Stealth_DB_EntryField.Text = "1";
+            Stealth_D_EntryField.Text = "1";
+            Alchemy_EntryField.Text = "1";
+            Alchemy_DB_EntryField.Text = "1";
+            Alchemy_C_EntryField.Text = "1";
+            Crafting_EntryField.Text = "1";
+            Crafting_DB_EntryField.Text = "1";
+            Crafting_C_EntryField.Text = "1";
+            Disguise_EntryField.Text = "1";
+            Disguise_DB_EntryField.Text = "1";
+            Disguise_C_EntryField.Text = "1";
+            Medicine_EntryField.Text = "1";
+            Medicine_DB_EntryField.Text = "1";
+            Medicine_C_EntryField.Text = "1";
+            Fake_EntryField.Text = "1";
+            Fake_DB_EntryField.Text = "1";
+            Fake_C_EntryField.Text = "1";
+            Lockpicking_EntryField.Text = "1";
+            Lockpicking_DB_EntryField.Text = "1";
+            Lockpicking_C_EntryField.Text = "1";
+            MTraps_EntryField.Text = "1";
+            MTraps_DB_EntryField.Text = "1";
+            MTraps_C_EntryField.Text = "1";
+            ForceEntryField.Text = "1";
+            Force_DB_EntryField.Text = "1";
+            Force_I_EntryField.Text = "1";
+            DurabilityEntryField.Text = "1";
+            Durability_DB_EntryField.Text = "1";
+            Durability_I_EntryField.Text = "1";
+            Crons_EntryField.Text = "1";
+            Orens_EntryField.Text = "1";
+            Florens_EntryField.Text = "1";
+            Struggle_EntryField.Text = "1";
+            Struggle_DB_EntryField.Text = "1";
+            Struggle_R_EntryField.Text = "1";
+            Evasion_EntryField.Text = "1";
+            Evasion_DB_EntryField.Text = "1";
+            Evasion_R_EntryField.Text = "1";
+            Melee_EntryField.Text = "1";
+            Melee_DB_EntryField.Text = "1";
+            Melee_R_EntryField.Text = "1";
+            Horseback_EntryField.Text = "1";
+            Horseback_DB_EntryField.Text = "1";
+            Horseback_R_EntryField.Text = "1";
+            Sailing_EntryField.Text = "1";
+            Sailing_DB_EntryField.Text = "1";
+            Sailing_R_EntryField.Text = "1";
+            L_Blades_EntryField.Text = "1";
+            L_R_DB_EntryField.Text = "1";
+            TreeEntryField.Text = "1";
+            Tree_DB_EntryField.Text = "1";
+            Tree_R_EntryField.Text = "1";
+            SwordEntryField.Text = "1";
+            Sword_DB_EntryField.Text = "1";
+            Sword_R_EntryField.Text = "1";
+            Charisma_EntryField.Text = "1";
+            Charisma_DB_EntryField.Text = "1";
+            Charisma_E_EntryField.Text = "1";
+            Deception_EntryField.Text = "1";
+            Deception_DB_EntryField.Text = "1";
+            Deception_E_EntryField.Text = "1";
+            Art_EntryField.Text = "1";
+            Art_DB_EntryField.Text = "1";
+            Art_E_EntryField.Text = "1";
+            Games_EntryField.Text = "1";
+            Games_DB_EntryField.Text = "1";
+            Games_E_EntryField.Text = "1";
+            Appearance_EntryField.Text = "1";
+            Appearance_DB_EntryField.Text = "1";
+            Appearance_E_EntryField.Text = "1";
+            Understand_EntryField.Text = "1";
+            Understand_DB_EntryField.Text = "1";
+            Understand_E_EntryField.Text = "1";
+            Leadership_EntryField.Text = "1";
+            Leadership_DB_EntryField.Text = "1";
+            Leadership_E_EntryField.Text = "1";
+            Belief_EntryField.Text = "1";
+            Belief_DB_EntryField.Text = "1";
+            Belief_E_EntryField.Text = "1";
+            Performance_EntryField.Text = "1";
+            Performance_DB_EntryField.Text = "1";
+            Performance_E_EntryField.Text = "1";
+            Seduction_EntryField.Text = "1";
+            Seduction_DB_EntryField.Text = "1";
+            Seduction_E_EntryField.Text = "1";
+            Bravery_EntryField.Text = "1";
+            Bravery_DB_EntryField.Text = "1";
+            Bravery_W_EntryField.Text = "1";
+            Porcha_EntryField.Text = "1";
+            Porcha_DB_EntryField.Text = "1";
+            Porcha_W_EntryField.Text = "1";
+            Intimidation_EntryField.Text = "1";
+            Intimidation_DB_EntryField.Text = "1";
+            Intimidation_W_EntryField.Text = "1";
+            MSpells_EntryField.Text = "1";
+            MSpells_DB_EntryField.Text = "1";
+            MSpells_W_EntryField.Text = "1";
+            RConviction_EntryField.Text = "1";
+            RConviction_DB_EntryField.Text = "1";
+            RConviction_W_EntryField.Text = "1";
+            MRituals_EntryField.Text = "1";
+            MRituals_DB_EntryField.Text = "1";
+            MRituals_W_EntryField.Text = "1";
+            Equipment_Editor.Text = "1";
+            Notes_Editor.Text = "1";
+            restEntryField.Text = "1";
+            WeightEntryField.Text = "1";
+            EnduranceEntryField.Text = "1";
+            HPEntryField.Text = "1";
+            JumpEntryField.Text = "1";
+            RunEntryField.Text = "1";
+            FatigueEntryField.Text = "1";
+            LuckEntryField.Text = "1";
+            Appearance_DB_EntryField2.Text = "1";
+
+
+            #endregion
+
+            #region[Вычисление навыков]
 
             if (BodyEntryField.Text != null) { WeightEntryField.Text = String.Format("{0:D2}", (Int32.Parse(BodyEntryField.Text) * 10)); } //Вес Weight }
             if (RunEntryField.Text != null) { RunEntryField.Text = String.Format("{0:D2}", (Int32.Parse(SpeedEntryField.Text) * 3)); } //Бег run
@@ -49,6 +278,99 @@ namespace MauiApp7
             RunEntryField.Text = String.Format("{0:D2}", (Int32.Parse(SpeedEntryField.Text) * 3));
             JumpEntryField.Text = String.Format("{0:D2}", (Int32.Parse(RunEntryField.Text) / 5));
 
+            switch ((Int32.Parse(BodyEntryField.Text) + Int32.Parse(WillEntryField.Text)) / 2)
+            {
+                case 1:
+                    HPEntryField.Text = String.Format("{0:D2}", 10);  //ПЗ
+                    EnduranceEntryField.Text = String.Format("{0:D2}", 10); //выносливость
+                    restEntryField.Text = String.Format("{0:D2}", 2); //отдых
+                    FatigueEntryField.Text = String.Format("{0:D2}", 2); //усталость
+                    break;
+                case 2:
+                    HPEntryField.Text = String.Format("{0:D2}", 10);  //ПЗ
+                    EnduranceEntryField.Text = String.Format("{0:D2}", 10); //выносливость
+                    restEntryField.Text = String.Format("{0:D2}", 2); //отдых
+                    FatigueEntryField.Text = String.Format("{0:D2}", 2); //усталость
+                    break;
+                case 3:
+                    HPEntryField.Text = String.Format("{0:D2}", 15);  //ПЗ
+                    EnduranceEntryField.Text = String.Format("{0:D2}", 15); //выносливость
+                    restEntryField.Text = String.Format("{0:D2}", 3); //отдых
+                    FatigueEntryField.Text = String.Format("{0:D2}", 3); //усталость
+                    break;
+                case 4:
+                    HPEntryField.Text = String.Format("{0:D2}", 20);  //ПЗ
+                    EnduranceEntryField.Text = String.Format("{0:D2}", 20); //выносливость
+                    restEntryField.Text = String.Format("{0:D2}", 4); //отдых
+                    FatigueEntryField.Text = String.Format("{0:D2}", 4); //усталость
+                    break;
+                case 5:
+                    HPEntryField.Text = String.Format("{0:D2}", 25);  //ПЗ
+                    EnduranceEntryField.Text = String.Format("{0:D2}", 25); //выносливость
+                    restEntryField.Text = String.Format("{0:D2}", 5); //отдых
+                    FatigueEntryField.Text = String.Format("{0:D2}", 5); //усталость
+                    break;
+                case 6:
+                    HPEntryField.Text = String.Format("{0:D2}", 30);  //ПЗ
+                    EnduranceEntryField.Text = String.Format("{0:D2}", 30); //выносливость
+                    restEntryField.Text = String.Format("{0:D2}", 6); //отдых
+                    FatigueEntryField.Text = String.Format("{0:D2}", 6); //усталость
+                    break;
+                case 7:
+                    HPEntryField.Text = String.Format("{0:D2}", 35);  //ПЗ
+                    EnduranceEntryField.Text = String.Format("{0:D2}", 35); //выносливость
+                    restEntryField.Text = String.Format("{0:D2}", 7); //отдых
+                    FatigueEntryField.Text = String.Format("{0:D2}", 7); //усталость
+                    break;
+                case 8:
+                    HPEntryField.Text = String.Format("{0:D2}", 40);  //ПЗ
+                    EnduranceEntryField.Text = String.Format("{0:D2}", 40); //выносливость
+                    restEntryField.Text = String.Format("{0:D2}", 8); //отдых
+                    FatigueEntryField.Text = String.Format("{0:D2}", 8); //усталость
+                    break;
+                case 9:
+                    HPEntryField.Text = String.Format("{0:D2}", 45);  //ПЗ
+                    EnduranceEntryField.Text = String.Format("{0:D2}", 45); //выносливость
+                    restEntryField.Text = String.Format("{0:D2}", 9); //отдых
+                    FatigueEntryField.Text = String.Format("{0:D2}", 9); //усталость
+                    break;
+                case 10:
+                    HPEntryField.Text = String.Format("{0:D2}", 50);  //ПЗ
+                    EnduranceEntryField.Text = String.Format("{0:D2}", 50); //выносливость
+                    restEntryField.Text = String.Format("{0:D2}", 10); //отдых
+                    FatigueEntryField.Text = String.Format("{0:D2}", 10); //усталость
+                    break;
+                case 11:
+                    HPEntryField.Text = String.Format("{0:D2}", 55);  //ПЗ
+                    EnduranceEntryField.Text = String.Format("{0:D2}", 55); //выносливость
+                    restEntryField.Text = String.Format("{0:D2}", 11); //отдых
+                    FatigueEntryField.Text = String.Format("{0:D2}", 10); //усталость
+                    break;
+                case 12:
+                    HPEntryField.Text = String.Format("{0:D2}", 60);  //ПЗ
+                    EnduranceEntryField.Text = String.Format("{0:D2}", 60); //выносливость
+                    restEntryField.Text = String.Format("{0:D2}", 12); //отдых
+                    FatigueEntryField.Text = String.Format("{0:D2}", 10); //усталость
+                    break;
+                case 13:
+                    HPEntryField.Text = String.Format("{0:D2}", 65);  //ПЗ
+                    EnduranceEntryField.Text = String.Format("{0:D2}", 65); //выносливость
+                    restEntryField.Text = String.Format("{0:D2}", 13); //отдых
+                    FatigueEntryField.Text = String.Format("{0:D2}", 10); //усталость
+                    break;
+                case > 13:
+                    HPEntryField.Text = "слишком много";  //ПЗ
+                    EnduranceEntryField.Text = "слишком много"; //выносливость
+                    restEntryField.Text = "слишком много"; //отдых
+                    FatigueEntryField.Text = "слишком много"; //усталость
+                    break;
+
+            }
+
+            #endregion
+
+            #region[Заполнение Основ навыков]
+
             Attention_I_EntryField.Text = IntelligenceEntryField.Text;
             Trade_I_EntryField.Text = IntelligenceEntryField.Text;
             Deduction_I_EntryField.Text = IntelligenceEntryField.Text;
@@ -61,11 +383,13 @@ namespace MauiApp7
             Tactics_I_EntryField.Text = IntelligenceEntryField.Text;
             Knowledge_I_EntryField.Text = IntelligenceEntryField.Text;
             Survival_I_EntryField.Text = IntelligenceEntryField.Text;
+
             Shoot_Bow_D_EntryField.Text = DexterityEntryField.Text;
             Athletics_D_EntryField.Text = DexterityEntryField.Text;
             ShootCrossbow_D_EntryField.Text = DexterityEntryField.Text;
             Sleight_D_EntryField.Text = DexterityEntryField.Text;
             Stealth_D_EntryField.Text = DexterityEntryField.Text;
+
             Alchemy_C_EntryField.Text = RepairEntryField.Text;
             Crafting_C_EntryField.Text = RepairEntryField.Text;
             Disguise_C_EntryField.Text = RepairEntryField.Text;
@@ -73,8 +397,10 @@ namespace MauiApp7
             Fake_C_EntryField.Text = RepairEntryField.Text;
             Lockpicking_C_EntryField.Text = RepairEntryField.Text;
             MTraps_C_EntryField.Text = RepairEntryField.Text;
+
             Force_I_EntryField.Text = BodyEntryField.Text;
             Durability_I_EntryField.Text = BodyEntryField.Text;
+
             Struggle_R_EntryField.Text = ReflexesEntryField.Text;
             Evasion_R_EntryField.Text = ReflexesEntryField.Text;
             Melee_R_EntryField.Text = ReflexesEntryField.Text;
@@ -83,6 +409,7 @@ namespace MauiApp7
             Tree_R_EntryField.Text = ReflexesEntryField.Text;
             Sword_R_EntryField.Text = ReflexesEntryField.Text;
             L_R_S.Text = ReflexesEntryField.Text;
+
             Charisma_E_EntryField.Text = EmpathyEntryField.Text;
             Deception_E_EntryField.Text = EmpathyEntryField.Text;
             Art_E_EntryField.Text = EmpathyEntryField.Text;
@@ -93,6 +420,7 @@ namespace MauiApp7
             Belief_E_EntryField.Text = EmpathyEntryField.Text;
             Performance_E_EntryField.Text = EmpathyEntryField.Text;
             Seduction_E_EntryField.Text = EmpathyEntryField.Text;
+
             Bravery_W_EntryField.Text = WillEntryField.Text;
             Porcha_W_EntryField.Text = WillEntryField.Text;
             Intimidation_W_EntryField.Text = WillEntryField.Text;
@@ -101,7 +429,22 @@ namespace MauiApp7
             MRituals_W_EntryField.Text = WillEntryField.Text;
             Appearance_W_EntryField2.Text = WillEntryField.Text;
 
+            #endregion
 
+            int ad = 0;
+        }
+
+
+
+        private void RefreshButton_Clicked(object sender, System.EventArgs e)
+        {
+            //Wichard_load();
+
+            
+
+            
+
+            Refresh();
         }
 
         public Wichard_Page_Main()
@@ -110,11 +453,9 @@ namespace MauiApp7
 
             var screenWidth = DeviceDisplay.MainDisplayInfo.Width;
 
-
-
             Wichard_load();
-           
 
+            
         }
         
         const string DB_NAME = "demo_local_db.db3";
@@ -208,8 +549,8 @@ namespace MauiApp7
                 MSpells_W_EntryField.Text = ((MauiApp7.Player)this.Background.BindingContext).WillEntryField;
                 RConviction_W_EntryField.Text = ((MauiApp7.Player)this.Background.BindingContext).WillEntryField;
                 MRituals_W_EntryField.Text = ((MauiApp7.Player)this.Background.BindingContext).WillEntryField;
+                Equipment_Editor.Text = ((MauiApp7.Player)this.Background.BindingContext).EquipmentEditor;
                 Appearance_W_EntryField2.Text = ((MauiApp7.Player)this.Background.BindingContext).WillEntryField;
-
 
                 switch ((Int32.Parse(BodyEntryField.Text) + Int32.Parse(WillEntryField.Text)) / 2)
                 {
@@ -935,6 +1276,9 @@ namespace MauiApp7
 
         #region [Увеличение и уменьшение значения в блоке реакции]
 
+
+        private bool decreaseButtonPressed = false;
+        private const int LongPressDurationMilliseconds = 500;
         private void IncreaseButton_Clicked2(object sender, EventArgs e)
         {
             if (sender is Button button && button.Parent is HorizontalStackLayout stackLayout)
@@ -958,6 +1302,123 @@ namespace MauiApp7
                 }
             }
         }
+
+        #region[долгое Уменьшение]
+        private async void  DecreaseButton_Pressed(object sender, EventArgs e)
+        {
+            decreaseButtonPressed = true;
+
+            Device.StartTimer(TimeSpan.FromMilliseconds(LongPressDurationMilliseconds), () =>
+            {
+                if (decreaseButtonPressed)
+                {
+                    // Возвращаем false, чтобы таймер не запускался снова
+                    return false;
+                }
+                else
+                {
+                    // Если кнопка больше не нажата, останавливаем таймер
+                    return false;
+                }
+            });
+        }
+
+        #region
+
+        public class InputDialogPage : ContentPage
+        {
+            private Entry inputEntry;
+            private Button okButton;
+
+            public string InputValue { get; private set; }
+
+            public InputDialogPage()
+            {
+                Title = "Input Dialog";
+
+                inputEntry = new Entry();
+                okButton = new Button { Text = "OK" };
+                okButton.Clicked += OnOKButtonClicked;
+
+                Content = new StackLayout
+                {
+                    Padding = new Thickness(20),
+                    Children = {
+                    new Label { Text = "Введите значение:" },
+                    inputEntry,
+                    okButton
+                }
+                };
+            }
+
+            private async void OnOKButtonClicked(object sender, EventArgs e)
+            {
+                InputValue = inputEntry.Text;
+                await Navigation.PopModalAsync();
+            }
+
+            public async Task<string> WaitForInputAsync()
+            {
+                await Navigation.PushModalAsync(this);
+                await Task.Delay(100); // Чтобы дать время для отображения страницы
+                await Task.Run(() =>
+                {
+                    while (InputValue == null)
+                    {
+                        // Ожидаем ввода значения
+                    }
+                });
+                return InputValue;
+            }
+        }
+        #endregion
+
+        private async Task<int> Decreasemsgbox()
+        {
+            // Сброс флага при отпускании кнопки
+
+
+
+            //int result = (Int32.Parse(result1));
+            int result = 0;
+            return result;
+        }
+        private void DecreaseButton_Released(object sender, EventArgs e)
+        {
+            // Сброс флага при отпускании кнопки
+            decreaseButtonPressed = false;
+        }
+
+
+        #endregion
+
+
+        #region[долгое Увеличение]
+        private void IncreaseButton_Pressed(object sender, EventArgs e)
+        {
+            // Установка флага, что кнопка нажата
+            decreaseButtonPressed = true;
+
+            // Запуск таймера для определения долгого нажатия
+            Device.StartTimer(TimeSpan.FromMilliseconds(LongPressDurationMilliseconds), () =>
+            {
+                if (decreaseButtonPressed)
+                {
+                    DisplayAlert("Увеличение", "Увеличение.", "OK");
+                    
+                    // Действие, выполняемое при долгом нажатии
+                    // Например, уменьшить значение поля NumberEntry
+                }
+                return false; // Возвращаем false, чтобы таймер остановился после первого выполнения
+            });
+        }
+
+        private void IncreaseButton_Released(object sender, EventArgs e)
+        {
+            // Сброс флага при отпускании кнопки
+            decreaseButtonPressed = false;
+        }
+        #endregion
 
         #endregion
 
@@ -1065,24 +1526,13 @@ namespace MauiApp7
                     break;
             }
 
-            int buf;
-            switch (((Microsoft.Maui.Controls.InputView)parameter).Text)
+            var buf = ((Microsoft.Maui.Controls.InputView)parameter).Text switch
             {
-                case null:
-                    buf = 0;
-                    break;
-                case "":
-                    buf = 0;
-                    break;
-                case " ":
-                    buf = 0;
-                    break;
-                default:
-                    buf = Int32.Parse(((((InputView)parameter).Text))?.ToString().Trim().ToLower());
-                    break;
-            }
-
-
+                null => 0,
+                "" => 0,
+                " " => 0,
+                _ => Int32.Parse(((((InputView)parameter).Text))?.ToString().Trim().ToLower()),
+            };
             int debuf;
             switch (((Microsoft.Maui.Controls.InputView)this.Debuff).Text)
             {

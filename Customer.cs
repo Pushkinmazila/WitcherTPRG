@@ -11,23 +11,7 @@ using TableAttribute = SQLite.TableAttribute;
 
 namespace MauiApp7
 {
-    [Table("customer")]
-    public class Customer
-    {
-        [PrimaryKey]
-        [AutoIncrement]
 
-        [Column("id")]
-        public int Id { get; set; }
-        [Column("CustomerName")]
-        public string CustomerName { get; set; }
-        [Column("Mobile")]
-        public string Mobile { get; set; }
-        [Column("Email")]
-        public string Email { get; set; }
-
-
-    }
 
     [Table("Player")]
     public class Player
@@ -795,5 +779,70 @@ namespace MauiApp7
             return customer;
         }
     }
+
+    [Table("Weapon")]
+    public class Weapon
+    {
+        [PrimaryKey]
+        [AutoIncrement]
+
+        [Column("id")]
+        public int Id { get; set; }
+
+        [Column("Название")]
+        public string Название { get; set; }
+
+        [Column("Тип_урона")]
+        public string Тип_Урона { get; set; }
+
+        [Column("Точность")]
+        public string Точность { get; set; }
+
+        [Column("Доступность")]
+        public string Доступность { get; set; }
+
+        [Column("Урон")]
+        public string Урон { get; set; }
+
+        [Column("Урон+")]
+        public string УронPlus { get; set; }
+
+        [Column("Надёжность")]
+        public string Надёжность { get; set; }
+
+        [Column("Xват")]
+        public string Xват { get; set; }
+
+        [Column("Дальность")]
+        public string Дальность { get; set; }
+
+        [Column("Эффект")]
+        public string Эффект { get; set; }
+
+        [Column("Эффект_логика")]
+        public string ЭффектЛогика { get; set; }
+
+        [Column("Скрытность")]
+        public string Скрытность { get; set; }
+
+        [Column("Усиление")]
+        public string Усиление { get; set; }
+
+        [Column("Вес")]
+        public string Вес { get; set; }
+
+        [Column("Цена")]
+        public string Цена { get; set; }
+
+        [Column("Категория")]
+        public string Категория { get; set; }
+
+        [Column("Навык")]
+        public string Навык { get; set; }
+        [Column("IsChecked")]
+        public bool IsChecked { get; set; }
+    }
+
+
 }
 

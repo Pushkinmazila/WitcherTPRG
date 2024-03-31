@@ -9,7 +9,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Wichard_Page"
     mc:Ignorable="d">
-
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem
+            Text="Настройки"
+            Command="{Binding ShowReleasesCommand}" />
+    </TabbedPage.ToolbarItems>
+    
     <TabbedPage.Children>
         <local:Wichard_Page_Main />
         <local:Wichard_Page_Inventory />

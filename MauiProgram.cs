@@ -4,6 +4,8 @@ using static MauiApp7.MainPage;
 //using UraniumUI;
 using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Storage;
+using InputKit.Handlers;
+using UraniumUI;
 
 namespace MauiApp7
 {
@@ -14,15 +16,26 @@ namespace MauiApp7
         {
             var builder = MauiApp.CreateBuilder();
             builder
-                //.UseUraniumUI()
+                .UseUraniumUI()
                 .UseMauiCommunityToolkit()
-                //.UseUraniumUIMaterial() //
+                .UseUraniumUIMaterial()
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+            builder
+                .UseMauiApp<App>()
+                .UseUraniumUI()
+                .UseUraniumUIMaterial()
+                .ConfigureMauiHandlers(handlers =>
+                {
+                    
+                    handlers.AddInputKitHandlers();
+                });
+
+
 
             builder.Services.AddSingleton<LocalDbService>();
             builder.Services.AddTransient<MainPage>();

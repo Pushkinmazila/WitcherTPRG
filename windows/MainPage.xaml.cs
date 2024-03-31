@@ -1,39 +1,9 @@
-﻿using System.Data.SqlTypes;
-using System.Xml.Serialization;
-using System.Globalization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
-using System;
-using Microsoft.Maui.Controls;
-using System.IO;
-using System.Collections.Generic;
-using System.Xml.Linq;
-using System.Xml;
-using System.Dynamic;
-using Microsoft.Maui.Controls;
-using static System.Net.Mime.MediaTypeNames;
-using System.Collections.ObjectModel;
-using CommunityToolkit.Maui.Alerts;
+﻿using System.Xml;
 using CommunityToolkit.Maui.Storage;
-using System;
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Text;
-using System.IO;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
-using System;
-using System.IO;
-using System.Threading;
-using Microsoft.Maui.Controls.PlatformConfiguration;
 using System.Windows.Input;
-using System.Diagnostics;
-using System.Net;
-using Microsoft.Maui.Controls;
-using System.Collections;
+using System.Collections.ObjectModel;
 
 
 
@@ -44,7 +14,6 @@ namespace MauiApp7
     {
 
         IFileSaver fileSaver;
-        private int count = 0;
         private readonly LocalDbService _dbService;
         private int _editCustomerID;
         private readonly HttpClient _client; //Запрос к гитхабу для получения обновы
@@ -61,10 +30,9 @@ namespace MauiApp7
         public MainPage(LocalDbService dbService)
         {
             updateapp();
-            
 
-
-
+            BindingContext = new TreeViewPageViewModel();
+            int a2 = 0;
 
             InitializeComponent();
             _dbService = dbService;
@@ -76,6 +44,8 @@ namespace MauiApp7
             Task.Run(async () => Users = await _dbService.GetCustomers());
             int a = 0;
 
+
+
             this.fileSaver = fileSaver;
 
             
@@ -84,16 +54,12 @@ namespace MauiApp7
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            listView_update();
-            // Здесь можно выполнить действия, которые нужно сделать, когда страница отображается
-            // Например, обновить данные, загрузить новую информацию и т.д.
         }
         public void OnAppearing(LocalDbService dbService)
         {
             listView_update();
             Task.Run(async () => listView.ItemsSource = await _dbService.GetCustomers());
             Task.Run(async () => Users = await _dbService.GetCustomers());
-            this.fileSaver = fileSaver;
             base.OnAppearing();
         }
 
@@ -131,26 +97,38 @@ namespace MauiApp7
 
             if (lastElement.TagName != appVersion) 
             {
-                    // Запрос пользователя о желании установить файл
+                //upapp();
+
+                if (Environment.OSVersion.Platform.ToString() == "Unix")
+                {
                     bool result = await DisplayAlert("Обнаружена новая версия", $"Хотите установить новую версию {releasesInfo[0].TagName}, у вас {appVersion}?", "Да", "Нет");
 
                     if (result)
                     {
-                        string d = releasesInfo[0].DownloadUrl;
                         // Загружаем и устанавливаем APK файл
                         DownloadFileAsync(releasesInfo[0].DownloadUrl, "C:/Users/Admin/Downloads");
 
-                        int f25 = 0;
                     }
                     else
                     {
                         // Выводим сообщение об отмене установки
                         await DisplayAlert("Установка APK", "Установка отменена пользователем.", "OK");
                     }
+                   
+                }
+                else if (Environment.OSVersion.Platform.ToString() == "Win32NT")
+                {
+                    
+
+                  
+                }
+                //Запрос пользователя о желании установить файл
+
+                
 
             }
 
-            int x = 0;
+           
         }
 
         #region [Получить ссылку для загрузки]
@@ -220,61 +198,14 @@ namespace MauiApp7
 
         #region [Получить ссылку для загрузки]
         //public class GitHubApiClient
-        //{
-        //    private readonly HttpClient _client;
-
-        //    public GitHubApiClient()
-        //    {
-        //        _client = new HttpClient();
-        //        _client.DefaultRequestHeaders.Add("User-Agent", "MyGitHubApp");
-        //        _client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
-        //    }
-
-        //    public async Task<string> GetLatestReleaseDownloadUrl(string owner, string repo)
-        //    {
-        //        try
-        //        {
-        //            string apiUrl = $"https://api.github.com/repos/{owner}/{repo}/releases/latest";
-
-        //            HttpResponseMessage response = await _client.GetAsync(apiUrl);
-
-        //            if (response.IsSuccessStatusCode)
-        //            {
-        //                string responseBody = await response.Content.ReadAsStringAsync();
-
-        //                // Преобразование JSON в объект JsonDocument
-        //                using JsonDocument doc = JsonDocument.Parse(responseBody);
-        //                var root = doc.RootElement;
-
-        //                // Извлечение browser_download_url из ассета последнего релиза
-        //                if (root.TryGetProperty("assets", out var assets))
-        //                {
-        //                    foreach (var asset in assets.EnumerateArray())
-        //                    {
-        //                        if (asset.TryGetProperty("browser_download_url", out var downloadUrl))
-        //                        {
-        //                            return downloadUrl.GetString();
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //            else
-        //            {
-        //                Console.WriteLine("Ошибка: " + response.StatusCode);
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Console.WriteLine("Ошибка: " + ex.Message);
-        //        }
-
-        //        return null;
-        //    }
+        
         //}
         #endregion
+        //private async void upapp()
+        
+        //}
 
-
-private async void OnApkFileTapped(object sender, ItemTappedEventArgs e)
+        private async void OnApkFileTapped(object sender, ItemTappedEventArgs e)
     {
         if (e.Item is GitHubReleaseInfo releaseInfo)
         {
@@ -287,7 +218,6 @@ private async void OnApkFileTapped(object sender, ItemTappedEventArgs e)
                     // Загружаем и устанавливаем APK файл
                    DownloadFileAsync(releaseInfo.DownloadUrl, "C:/Users/Admin/Downloads");
 
-                    int f25 = 0;
             }
             else
             {
@@ -305,14 +235,7 @@ private async void OnApkFileTapped(object sender, ItemTappedEventArgs e)
 
 
             var platform = DeviceInfo.Platform;
-
-            // "{WinUI}":
-            //{Android}
-
-
             string os = Environment.OSVersion.Platform.ToString();
-
-
             if (os == "Unix")
             {
                 byte[] fileBytes;
@@ -814,7 +737,6 @@ private async void OnApkFileTapped(object sender, ItemTappedEventArgs e)
         {
             Button button = (Button)sender;
             button.Text = "жди  !";
-            
             Wichard_Button.Clicked += to_Wichard_Page;
         }
 
@@ -844,46 +766,6 @@ private async void OnApkFileTapped(object sender, ItemTappedEventArgs e)
 
             private async void Cyberpunk_red_ButtonClicked(object sender, System.EventArgs e)
         {
-
-
-
-            //var people = new Dictionary<string, string>();
-            //var lang = new Dictionary<string, string>();
-            string filePath2 = "Char_List.xml";
-
-            
-
-            //Button button = (Button)sender;
-            //button.Text = "Нажато!R";
-            //Wichard_Button.Clicked += to_Cyberpunk_red_Page;
-
-
-            //string filePath = "C:/Users/Admin/source/repos/MauiApp7/Char_List.xml";
-            //XDocument doc = XDocument.Load(filePath);
-
-            //foreach (XElement el in doc.Root.Elements())
-            //{
-            //    //Выводим имя элемента и значение аттрибута id
-            //    //System.Diagnostics.Debug.WriteLine("{0} {1}", el.Name, el.Attribute("id").Value);
-            //    //System.Diagnostics.Debug.WriteLine("  Attributes:");
-            //    //выводим в цикле все аттрибуты, заодно смотрим как они себя преобразуют в строку
-            //    foreach (XAttribute attr in el.Attributes())
-
-            //    //System.Diagnostics.Debug.WriteLine("    {0}", attr);
-
-            //    //System.Diagnostics.Debug.WriteLine("  Elements:");
-            //    //выводим в цикле названия всех дочерних элементов и их значения
-
-            //    foreach (XElement element in el.Elements())
-            //    {
-            //        System.Diagnostics.Debug.WriteLine("    {0}: {1}", element.Name, element.Value);
-            //            people.Add((element.Name).LocalName, (element.Value).Replace('"', '_').Replace("_", "")   );
-            //            if (element.FirstAttribute != null)
-            //            {
-            //                lang.Add(element.FirstAttribute.Value, element.LastAttribute.Value);
-            //            }
-            //    }
-            string filePath3 = "Char_List.xml";
         }
 
         private async void to_Cyberpunk_red_Page(object? sender, EventArgs e)
@@ -891,22 +773,63 @@ private async void OnApkFileTapped(object sender, ItemTappedEventArgs e)
             await Navigation.PushModalAsync(new Cyberpunk_red_Page());
         }
 
-        //    private void OnCounterClicked(object sender, EventArgs e)
-        //{
-        //    count++;
 
-        //    if (count == 1)
-        //        CounterBtn.Text = $"Clicked {count} time";
-        //    else
-        //        CounterBtn.Text = $"Clicked {count} times";
 
-        //    SemanticScreenReader.Announce(CounterBtn.Text);
-        //}
 
-        //private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
-        //{
-        //}
     }
 
-    
+    public class MyItem
+    {
+        public MyItem()
+        {
+        }
+
+        public MyItem(string name) // For easy initialization (optional)
+        {
+            Name = name;
+        }
+
+        public virtual string Name { get; set; }
+        public virtual IList<MyItem> Children { get; set; } = new ObservableCollection<MyItem>();
+    }
+
+    public class TreeViewPageViewModel : BindableObject
+    {
+
+        public ObservableCollection<MyItem> Nodes { get; set; } = new();
+
+        public TreeViewPageViewModel()
+        {
+            Nodes.Add(new MyItem("A")
+            {
+                Children =
+            {
+                new MyItem("A.1"),
+                new MyItem("A.2"),
+            }
+            });
+            Nodes.Add(new MyItem("B")
+            {
+                Children =
+            {
+                new MyItem("B.1")
+                {
+                    Children =
+                    {
+                        new MyItem("B.1.a"),
+                        new MyItem("B.1.b"),
+                        new MyItem("B.1.c"),
+                        new MyItem("B.1.d"),
+
+                    }
+                },
+                new MyItem("B.2"),
+            }
+            });
+            Nodes.Add(new MyItem("C"));
+            Nodes.Add(new MyItem("D"));
+        }
+    }
+
+
 }

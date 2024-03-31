@@ -3,23 +3,28 @@
     x:Class="MauiApp7.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
     xmlns:uranium="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
-    xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material">
-    
-    
+    xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui">
+
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem
-            Text="Настройки"
-            Command="{Binding ShowReleasesCommand}" />
+        <ToolbarItem Command="{Binding ShowReleasesCommand}" Text="Настройки" />
     </ContentPage.ToolbarItems>
-    
+
     <FlexLayout Direction="Column">
         <VerticalStackLayout
             Padding="10"
             BackgroundColor="Beige"
-            FlexLayout.Basis="700">
+            FlexLayout.Basis="Auto">
+
+
+            
+
+
             <Grid Margin="3">
                 <Grid.RowDefinitions>
+                    <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
@@ -34,17 +39,16 @@
                     x:Name="Wichard_Button"
                     Grid.Row="0"
                     Margin="3"
+                    IsEnabled="False"
                     Pressed="WichardButtonClicked"
-                    Text="Wichard" 
-                    IsEnabled="False"/>
+                    Text="Wichard" />
                 <Button
                     x:Name="listView_update_Button"
                     Grid.Row="1"
                     Margin="3"
                     Pressed="listView_update_ButtonClicked"
-                    Text="Принудительно обновить список" 
-                    />
-                
+                    Text="Принудительно обновить список" />
+
                 <Entry
                     x:Name="nameEntryField"
                     Grid.Row="2"
@@ -55,9 +59,7 @@
                     Grid.Row="5"
                     Margin="3"
                     Clicked="saveButton_Clicked"
-                    Text="Создать" 
-                    
-                    />
+                    Text="Создать" />
 
                 <Button
                     x:Name="importButton"
@@ -68,12 +70,12 @@
 
 
                 <ListView
-                           x:Name="listView"
-                           FlexLayout.Grow="1"
-                           HasUnevenRows="True"
-                           Grid.Row="7"
-                           ItemTapped="listView_ItemTapped"
-                    HeightRequest ="300">
+                    x:Name="listView"
+                    Grid.Row="7"
+                    FlexLayout.Grow="1"
+                    HasUnevenRows="True"
+                    HeightRequest="300"
+                    ItemTapped="listView_ItemTapped">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -85,14 +87,14 @@
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
                                         <Label
-                                       Grid.Column="0"
-                                       FontAttributes="Bold"
-                                       FontSize="17"
-                                       Text="{Binding NameEntryField}" />
+                                            Grid.Column="0"
+                                            FontAttributes="Bold"
+                                            FontSize="17"
+                                            Text="{Binding NameEntryField}" />
                                         <Label
-                                       Grid.Column="2"
-                                       FontAttributes="Bold"
-                                       Text="{Binding DataEntryField}" />
+                                            Grid.Column="2"
+                                            FontAttributes="Bold"
+                                            Text="{Binding DataEntryField}" />
                                     </Grid>
 
                                     <Grid>
@@ -101,13 +103,11 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <Label 
-                                           Grid.Column="0" 
-                                           Text="{Binding JobEntryField}" />
+                                        <Label Grid.Column="0" Text="{Binding JobEntryField}" />
                                         <Label
-                                           Grid.Column="2"
-                                           FontAttributes="Bold"
-                                           Text="{Binding SexEntryField}" />
+                                            Grid.Column="2"
+                                            FontAttributes="Bold"
+                                            Text="{Binding SexEntryField}" />
                                     </Grid>
                                 </VerticalStackLayout>
                             </ViewCell>
@@ -116,21 +116,27 @@
                 </ListView>
 
                 <Border Grid.Row="8">
-
-                    <ListView x:Name="ListView_releasesInfo" ItemsSource="{Binding releasesInfo}" ItemTapped="OnApkFileTapped">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextCell Text="{Binding TagName}" CommandParameter="{Binding DownloadUrl}" />
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                    
-
+                    <StackLayout >
+                        <Label HorizontalOptions="Center" Text="Релизы" />
+                        <ListView
+                            x:Name="ListView_releasesInfo"
+                            ItemTapped="OnApkFileTapped"
+                            ItemsSource="{Binding releasesInfo}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextCell CommandParameter="{Binding DownloadUrl}" Text="{Binding TagName}" />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
                 </Border>
-
             </Grid>
 
+            <ScrollView HeightRequest="50" >
+                <material:TreeView Grid.Row="9" ItemsSource="{Binding Nodes}" SelectionMode="Multiple" SelectedItem="{Binding SelectedNode}" />
+            </ScrollView>
             
+
 
 
         </VerticalStackLayout>
@@ -140,14 +146,9 @@
 
 
 
-
-
-
-
-
     </FlexLayout>
-   
-    
-    
-    
+
+
+
+
 </ContentPage>

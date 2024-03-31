@@ -8,5 +8,5 @@
 <h2 align="center">Оставляйте свой фидбэк и что хотите увидеть: <a href="https://github.com/Pushkinmazila/WitcherTPRG/issues/new" target="_blank">Ссылка</a>
 <h3>Представляю вам проект интерактивного листа персонажа для настольной ролевой игры Ведьмак</h3>
 
-![alt text](./Screenshot_list.jpg)
+![alt text](./redame/Screenshot_list.jpg)
 <h3>Не все идиально но хоть что то</h3>
