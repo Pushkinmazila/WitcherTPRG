@@ -46,7 +46,7 @@ jobs:
         with:
           tag_name: "${{ steps.increment_release.outputs.incremented_release }}"
           release_name: "Release ${{ steps.increment_release.outputs.incremented_release }}"
-          body: Release notes
+          body: Release test notes
           draft: false
           prerelease: false
           run: echo "Latest release is ${{ steps.increment_release.outputs.incremented_release }}"
