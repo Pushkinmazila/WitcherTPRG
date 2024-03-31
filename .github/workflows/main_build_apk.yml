@@ -27,15 +27,15 @@ jobs:
     - name: Build
       run: | 
         dotnet build MauiApp7.csproj -c Release -f net8.0-android /p:AndroidSigningKeyStore=myapp.keystore /p:AndroidSigningKeyAlias=ghactionskey /p:AndroidSigningKeyPass="${{ secrets.KEYSTORE_PASSWORD }}" /p:AndroidSigningStorePass="${{ secrets.KEYSTORE_PASSWORD_ALIAS }}" --no-restore
-        curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "${{ secrets.BOT_TELLEGRAM_CHAT_ID }}", "text": "Я сделяль ${{ github.WORKFLOW }} воо"}' https://api.telegram.org/bot${{ secrets.BOT_TELLEGRAM_CHAT_TOKEN }}/sendMessage
+        curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "${{ secrets.BOT_TELLEGRAM_CHAT_ID }}", "text": "Я сделяль ${{ github.WORKFLOW }} билд окончен"}' https://api.telegram.org/bot${{ secrets.BOT_TELLEGRAM_CHAT_TOKEN }}/sendMessage
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          tag_name: v1.0.3
-          release_name: Release 1.0.3
+          tag_name: v1.0.4
+          release_name: Release 1.0.4
           body: Release notes
           draft: false
           prerelease: false
@@ -48,7 +48,7 @@ jobs:
       with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: D:/a/WitcherTPRG/WitcherTPRG/bin/Release/net8.0-android/com.nocompanyname.MauiApp7-Signed.apk
-          asset_name: my-app.apk
+          asset_name: WitcherTPRG.apk
           asset_content_type: application/vnd.android.package-archive
       
     
