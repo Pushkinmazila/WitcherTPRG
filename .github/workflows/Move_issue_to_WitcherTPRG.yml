@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get Backlog board views
+        id: hello
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PROJECT_ID: 3  # Замените на реальный ID проекта "WitcherTPRG"
@@ -18,5 +19,5 @@ jobs:
           views=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$PROJECT_ID/boards/$BOARD_ID/views" )
           echo "::set-output name=response::$views"  # Сохраняем ответ в выходную переменную
       - name: Check on failures
-        if: (${{ success() }} || ${{ failure() }}) && (${{ steps.hello.outcome }} == 'failure' || ${{ steps.world.outcome }} == 'failure')
+        if: (${{ success() }} || ${{ failure() }}) )
         run: exit 1
