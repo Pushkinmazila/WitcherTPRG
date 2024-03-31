@@ -8,6 +8,7 @@ on:
 jobs:
   get_board_views:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Get Backlog board views
         id: hello
