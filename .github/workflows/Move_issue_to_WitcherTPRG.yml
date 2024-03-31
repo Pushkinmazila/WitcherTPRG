@@ -1,9 +1,9 @@
 name: Get Backlog board views
 
 on:
-  issues:
-    types: [opened]
-
+  push:
+    branches:
+      - master
 jobs:
   get_board_views:
     runs-on: ubuntu-latest
