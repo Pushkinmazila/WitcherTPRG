@@ -15,7 +15,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PROJECT_ID: 3  # Замените на реальный ID проекта "WitcherTPRG"
           BOARD_ID: 1    # Замените на реальный ID доски "Backlog"
-          HELLO_STEP_ID: ${{ github.step_id }}
+          HELLO_STEP_ID: "test"
         run: |
           views=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/projects/$PROJECT_ID/boards/$BOARD_ID/views" )
           echo "::set-output name=response::$views"  # Сохраняем ответ в выходную переменную
