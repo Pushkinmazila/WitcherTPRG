@@ -20,3 +20,6 @@ jobs:
         run: |
           echo "{{ failure-message }}"
           exit 1
+      - name: Send Telegram Notification
+        run: |
+          curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "166879880", "text": "Ваш текст оповещения"}' https://api.telegram.org/bot1096638690:AAHnbtW76cjCLlEwZzn38fibVcZ29TSwp7Q/sendMessage
