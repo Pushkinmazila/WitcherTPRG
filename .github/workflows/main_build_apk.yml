@@ -27,9 +27,24 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build MauiApp7.csproj -c Release -f net8.0-android /p:AndroidSigningKeyStore=myapp.keystore /p:AndroidSigningKeyAlias=ghactionskey /p:AndroidSigningKeyPass="${{ secrets.KEYSTORE_PASSWORD }}" /p:AndroidSigningStorePass="${{ secrets.KEYSTORE_PASSWORD_ALIAS }}" --no-restore
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.1.0
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        path: |
-          ./**/*.aab
-          ./**/*.apk
+          tag_name: v1.0.0
+          release_name: Release 1.0.0
+          body: Release notes
+          draft: false
+          prerelease: false
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/Release/net8.0-android/*.apk
+          asset_name: my-app.apk
+          asset_content_type: application/vnd.android.package-archive
