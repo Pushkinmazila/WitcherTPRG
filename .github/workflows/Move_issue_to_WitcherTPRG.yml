@@ -20,9 +20,9 @@ jobs:
           echo "::set-output name=response::$views"  # Сохраняем ответ в выходную переменную
           if [ $? -ne 0 ]; then
             echo "Ошибка при выполнении команды curl"
-            curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "166879880", "text": "Я не сделяль $GITHUB_WORKFLOW и вот поч ${{ failure-message }}"}' https://api.telegram.org/bot1096638690:AAHnbtW76cjCLlEwZzn38fibVcZ29TSwp7Q/sendMessage
+            curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "${{ secrets.BOT_TELLEGRAM_CHAT_ID }}", "text": "Я не сделяль $GITHUB_WORKFLOW и вот поч ${{ failure-message }}"}' https://api.telegram.org/bot${{ secrets.BOT_TELLEGRAM_CHAT_TOKEN }}/sendMessage
             exit 1
           else
             echo "Команда curl выполнена успешно"
-            curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "166879880", "text": "Я сделяль $GITHUB_WORKFLOW"}' https://api.telegram.org/bot1096638690:AAHnbtW76cjCLlEwZzn38fibVcZ29TSwp7Q/sendMessage
+            curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "${{ secrets.BOT_TELLEGRAM_CHAT_ID }}", "text": "Я сделяль $GITHUB_WORKFLOW"}' https://api.telegram.org/bot${{ secrets.BOT_TELLEGRAM_CHAT_TOKEN }}/sendMessage
           fi
