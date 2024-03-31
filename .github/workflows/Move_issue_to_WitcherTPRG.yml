@@ -28,6 +28,16 @@ jobs:
         run: |
           latest_release=$(curl -s "https://api.github.com/repos/Pushkinmazila/WitcherTPRG/releases/latest" | jq -r '.tag_name')
           echo "::set-output name=latest_release::$latest_release"
+
+      - name: Increment Latest Release
+        id: increment_release
+        run: |
+          current_release="${{ steps.get_release.outputs.latest_release }}"
+          incremented_release=$(echo $current_release | awk -F '.' '{ print $1 "." $2 "." $3 + 1 }')
+          echo "::set-output name=incremented_release::$incremented_release"
+
+      - name: Use Incremented Release
+        run: echo "Incremented release is ${{ steps.increment_release.outputs.incremented_release }}"
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -39,4 +49,4 @@ jobs:
           body: Release notes
           draft: false
           prerelease: false
-          run: echo "Latest release is ${{ steps.get_release.outputs.latest_release }}"
+          run: echo "Latest release is ${{ steps.increment_release.outputs.incremented_release }}"
