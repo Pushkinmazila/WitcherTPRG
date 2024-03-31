@@ -32,14 +32,14 @@ jobs:
     - name: Get Latest Release
       id: get_release
       run: |
-          latest_release=$(curl -s "https://api.github.com/repos/Pushkinmazila/WitcherTPRG/releases/latest" | jq -r '.tag_name')
+          $latest_release = Invoke-RestMethod -Uri "https://api.github.com/repos/Pushkinmazila/WitcherTPRG/releases/latest" | Select-Object -ExpandProperty tag_name
           echo "::set-output name=latest_release::$latest_release"
 
     - name: Increment Latest Release
       id: increment_release
       run: |
-          current_release="${{ steps.get_release.outputs.latest_release }}"
-          incremented_release=$(echo $current_release | awk -F '.' '{ print $1 "." $2 "." $3 + 1 }')
+          $current_release = "${{ steps.get_release.outputs.latest_release }}"
+          $incremented_release = $current_release -replace '(\d+)$', { param($m) ($m.Value + 1) }
           echo "::set-output name=incremented_release::$incremented_release"
 
     - name: Use Incremented Release
