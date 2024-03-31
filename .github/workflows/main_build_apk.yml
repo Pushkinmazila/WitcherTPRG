@@ -1,0 +1,32 @@
+name: .NET MAUI Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.0.x' #версия.NET SDK
+
+    - name: Restore NuGet packages
+      run: dotnet restore
+
+    - name: Build .NET MAUI project
+      run: dotnet build -t:restore -t:build --configuration Release
+
+    - name: Publish Android APK
+      run: |
+        cd Platforms/Android
+        dotnet msbuild -t:InstallSdkTargets,PackageForAndroid -p:Configuration=Release
+    - name: Move APK file to Android project directory
+      run: mv bin/Release/*.apk Platforms/Android

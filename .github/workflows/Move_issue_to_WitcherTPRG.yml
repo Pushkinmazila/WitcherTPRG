@@ -1,0 +1,20 @@
+name: Get Backlog board views
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  get_board_views:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Backlog board views
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROJECT_ID: 3  # Замените на реальный ID проекта "WitcherTPRG"
+          BOARD_ID: 1    # Замените на реальный ID доски "Backlog"
+        run: |
+          views=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/users/Pushkinmazila/projects/3/views/1" | jq)
+          
+          echo "Views in board 'Backlog' (project 'WitcherTPRG'):"
+          echo "$views"
