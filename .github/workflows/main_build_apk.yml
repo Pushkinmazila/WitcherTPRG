@@ -61,7 +61,7 @@ jobs:
       run: dotnet restore
     - name: Build
       run: | 
-        dotnet build MauiApp7.csproj -c Release -f net8.0-android /p:AndroidSigningKeyStore=myapp.keystore /p:AndroidSigningKeyAlias=ghactionskey /p:AndroidSigningKeyPass="${{ secrets.KEYSTORE_PASSWORD }}" /p:AndroidSigningStorePass="${{ secrets.KEYSTORE_PASSWORD_ALIAS }}" --no-restore
+        dotnet build MauiApp7.csproj -c Release -f net8.0-android /p:AndroidSigningKeyStore=myapp.keystore /p:AndroidSigningKeyAlias=ghactionskey /p:AndroidSigningKeyPass="${{ secrets.KEYSTORE_PASSWORD }}" /p:AndroidSigningStorePass="${{ secrets.KEYSTORE_PASSWORD_ALIAS }}" --no-restore  --no-incremental -p:Version=${{ steps.increment_release.outputs.incremented_release }} -p:VersionPrefix=${{ steps.increment_release.outputs.incremented_release }} 
         curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "${{ secrets.BOT_TELLEGRAM_CHAT_ID }}", "text": "Я сделяль ${{ github.WORKFLOW }} билд окончен"}' https://api.telegram.org/bot${{ secrets.BOT_TELLEGRAM_CHAT_TOKEN }}/sendMessage
 
     - name: Upload Release Asset
